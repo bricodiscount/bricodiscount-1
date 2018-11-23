@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rhe_avancement_gestionnaire,rhe.rhe_avancement.gestionnaire,model_hr_contract_avancement,group_rhe_gestionnaire,1,1,1,1
+access_rhe_avancement_manager,rhe.rhe_avancement.manager,model_hr_contract_avancement,group_rhe_manager,1,1,1,1
+access_rhe_augmentation_gestionnaire,rhe.rhe_augmentation.gestionnaire,model_hr_contract_augmentation,group_rhe_gestionnaire,1,1,1,1
+access_rhe_augmentation_manager,rhe.rhe_augmentation.manager,model_hr_contract_augmentation,group_rhe_manager,1,1,1,1

@@ -1,0 +1,84 @@
+
+/* CSS Document */
+
+  .titrecol{
+    font-size:24px;
+    background-color:#EAEAEA;
+    font-family:cambria;
+    border: 1px solid #000;
+    align:center;
+  }
+  .titrecoli{
+    font-size:24px;
+    background-color:#EAEAEA;
+    font-family:cambria;
+    border: 1px solid #000;
+    align:center
+  }
+  .titrecolr{
+    font-size:22px;
+    background-color:#EAEAEA;
+    font-family:cambria;
+    border: 1px solid #000;
+    align:center;
+  }
+  .titrecolv{
+    font-size:22px;
+    background-color:#EAEAEA;
+    font-family:cambria;
+    border: 1px solid #000;
+    align:center
+  }
+  .titre {
+    font-size:30px;
+    font-weight:bold;
+    font-family:cambria;
+  }
+  .titrer {
+    font-size:24px;
+    font-weight:bold;
+    font-family:cambria;
+  }
+  .print {
+    font-size:20px;
+    font-family:cambria;
+  }
+  .poste {
+    font-size:24px;
+    font-family:cambria;
+  }
+  .postei {
+    font-size:24px;
+    font-family:cambria;
+  }
+  .poster {
+    font-size:18px;
+    font-family:cambria;
+  }
+  .postev {
+    font-size:18px;
+    font-family:cambria;
+  }
+  .dest {
+    font-size:20px;
+    font-family:cambria;
+  }
+  .postet {
+    font-size:24px;
+    font-family:cambria;
+  }
+  table td.entete {
+    text-align:center;
+    border-left:none;
+  }
+  .table-line {
+    line-height:3px;
+  }
+  .ap {
+    background-image: url(../img/aptab.png);
+    background-repeat:no-repeat;
+    background-position:center;
+  }
+  .apent {
+    background-image: url(../img/apent.png);
+  }

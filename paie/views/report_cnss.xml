@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="minimal_layout_inherit" inherit_id="web.minimal_layout">
+		<xpath expr="//head" position="inside">
+			<link rel='stylesheet' href="/rhextend/static/src/css/rhextend.css"/>
+		</xpath>
+</template>
+
+<template id="report_cnss">
+    <t t-call="web.html_container">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+            <t t-call="web.basic_layout">
+        <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <img t-att-src="'/rhextend/static/src/img/logo.png'" />
+                    <p><div align="center" class="titre">BORDERAU NOMINATIF DES TRAVAILLEURS DE L'EMPLOYEUR ECO OIL. Période du <span t-esc="debut"/> au <span t-esc="fin"/> </div></p>
+						<table class="table table-bordered">
+                          <thead class="titrecoli">
+  							<tr>
+							    <td>N° d'ordre</td>
+							    <td>NOMS - PRENOMS</td>
+							    <td>N° d'immatriculation CNSS</td>
+							    <td>Rémunération soumise à cotisation</td>
+							</tr>
+                          </thead>
+                         <tbody class="postei table-line">
+                          <t t-foreach="clines" t-as="cline">
+                            <tr>
+                                <td><span t-esc="cline['numordre']"/></td>
+                                <td><span t-esc="cline['nom']"/></td>
+                                <td><span t-esc="cline['imat']"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(cline['basecnss']).replace(',', ' ').replace('.', ',')"/></td>
+							</tr>
+                          </t>
+                         </tbody>
+						</table>
+
+						<table class="table table-bordered">
+                         <tbody class="postei table-line">
+                          <t t-foreach="tclines" t-as="tcline">
+                            <tr><td><strong>TOTAL</strong></td><td align="right"><strong><span t-esc="'{:,.0f}'.format(tcline['totbasecnss']).replace(',', ' ').replace('.', ',')"/></strong></td></tr>
+                            <tr><td><strong>TAUX</strong></td><td align="right">21,50%</td></tr>
+                            <tr><td><strong>COTISATIONS</strong></td><td align="right"><strong><span t-esc="'{:,.0f}'.format(tcline['totcnss']).replace(',', ' ').replace('.', ',')"/></strong></td></tr>
+                          </t>
+                         </tbody>
+						</table>
+
+                </div>
+        </t>
+        </t>
+    </t>
+</template>
+</odoo>

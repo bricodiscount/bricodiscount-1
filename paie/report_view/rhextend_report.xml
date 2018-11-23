@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report 
+            id="action_report_payslipeco" 
+            model="hr.payslip" 
+            string="Bulletin format Eco oil"
+            report_type="qweb-pdf"
+            name="rhextend.report_payslipeco" 
+            file="rhextend.report_payslipeco"
+        />
+
+</odoo>
