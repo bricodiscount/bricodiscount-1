@@ -164,7 +164,7 @@ class HrPayrollStructure(models.Model):
     _inherit = "hr.payroll.structure"
 
 
-    tauxa = fields.Selection([('25%','25%'),('20%','20%')], string = 'Taux abattement IUTS', required = True)
+    tauxa = fields.Selection([('25%','25%'),('20%','20%')], string = 'Taux abattement IUTS')
 
 class Employee(models.Model):
     _name = "hr.employee"
