@@ -1,0 +1,90 @@
+
+/* CSS Document */
+
+  .tbord td{
+    border: 1px solid #000;
+    
+  }
+  .tbord th{
+    border: 1px solid #000;
+    text-align:center;
+    vertical-align:center;
+    background-color:#CCCCCC;
+  }
+.titreval td {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #fff;
+    font-family:Arial;
+    font-size:16px;
+}
+.total {
+    background-color:#EEEEEE;
+    font-weight:bold;
+}
+  .titre{
+    font-size:24px;
+    background-color:#AAAAAA;
+    color:#FFFFFF;
+    font-family:cambria;
+    text-align:center;
+    font-weight:bold;
+  }
+  .soustitre{
+    font-size:22px;
+    font-family:cambria;
+    font-weight:bold;
+    font-style:italic;
+  }
+  .titrecol{
+    font-size:16px;
+    background-color:#EAEAEA;
+    font-family:Arial;
+    border: 1px solid #000;
+    text-align:center;
+    vertical-align:center;
+    font-weight:bold;
+  }
+  .titreval{
+    font-size:20px;
+    font-family:cambria;
+    border: 1px solid #000;
+    align:center
+  }
+  .sess{
+    font-size:20px;
+    font-family:cambria;
+    border: 1px solid #000;
+    align:center
+  }
+ table tr td{
+    border: 1px solid #000;
+    font-size:20px;
+    font-family:cambria;
+    padding: 5px 5px 5px 5px;
+  }
+  .signature1{
+    font-size:22px;
+    font-family:cambria;
+    text-align:center;
+    font-weight:bold;
+    float:left;
+  }
+  .signature2{
+    font-size:22px;
+    font-family:cambria;
+    text-align:center;
+    font-weight:bold;
+    float:right;
+  }
+  .baspage {
+    font-size:16px;
+    font-weight:bold;
+    font-family:cambria;
+    text-align:center;
+    color:#999999;
+    margin-top:5px;
+  }
+  .totsession {
+    display: inline-table;
+    vertical-align: top;
+   }

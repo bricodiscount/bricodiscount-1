@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="minimal_layout_inherit" inherit_id="web.minimal_layout">
+		<xpath expr="//head" position="inside">
+			<link rel='stylesheet' href="/rhextend/static/src/css/rhextend.css"/>
+		</xpath>
+</template>
+
+<template id="report_rubsal">
+    <t t-call="web.html_container">
+        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_header_spacing" t-value="9"/>
+        <t t-set="data_report_dpi" t-value="110"/>
+            <t t-call="web.basic_layout">
+        <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <img t-att-src="'/rhextend/static/src/img/logo.png'" height="70px" />
+                    <p><div align="center" class="titrer">SALAIRES PAR RUBRIQUE Période du <span t-esc="debut"/> au <span t-esc="fin"/> </div></p>
+						<table class="table table-bordered">
+                          <thead class="titrecolr">
+  							<tr>
+							    <td>Nom et prénoms Employé</td>
+							    <td>Sal. de Base</td>
+							    <td>Ind. Trans</td>
+							    <td>Ind. Fonc</td>
+							    <td>Ind. Log</td>
+							    <td>Sursalaire</td>
+							    <td>Salaire brut</td>
+							    <td>CNSS 1 </td>
+							    <td>CNSS 2</td>
+							    <td>IUTS Dû</td>
+							    <td>TPA</td>
+							    <td>Acpt</td>
+							    <td>Salaire Net</td>
+							</tr>
+                          </thead>
+                         <tbody class="poster table-line">
+                          <t t-foreach="clines" t-as="cline">
+                            <tr>
+                                <td><span t-esc="cline['nom']"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(cline['base']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(cline['transport']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(cline['fonction']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(cline['logement']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(cline['sursal']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(cline['brut']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(cline['cnss']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(cline['cnsse']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(cline['iuts']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(cline['remb']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(cline['snet']).replace(',', ' ').replace('.', ',')"/></td>
+							</tr>
+                          </t>
+                         </tbody>
+						</table>
+
+                </div>
+        </t>
+        </t>
+    </t>
+</template>
+</odoo>
