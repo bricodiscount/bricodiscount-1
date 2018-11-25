@@ -174,7 +174,7 @@ class ReportVendeursDet(models.AbstractModel):
         }
 
     @api.multi
-    def get_report_values(self, docids, data=None):
+    def _get_report_values(self, docids, data=None):
         data = dict(data or {})
         configs = self.env['pos.config'].browse(data['config_ids'])
         vendeur = self.env['res.users'].browse(data['vendeur'])
@@ -288,7 +288,7 @@ class ReportRayonsDet(models.AbstractModel):
         }
 
     @api.multi
-    def get_report_values(self, docids, data=None):
+    def _get_report_values(self, docids, data=None):
         data = dict(data or {})
         configs = self.env['pos.config'].browse(data['config_ids'])
         rayon = self.env['stock.location'].browse(data['rayon'])
@@ -363,7 +363,7 @@ class ReportVendeurs(models.AbstractModel):
         }
 
     @api.multi
-    def get_report_values(self, docids, data=None):
+    def _get_report_values(self, docids, data=None):
         data = dict(data or {})
         configs = self.env['pos.config'].browse(data['config_ids'])
         #raise UserError(_(vendeur))
