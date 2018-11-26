@@ -344,7 +344,7 @@ class ReportVendeurs(models.AbstractModel):
 
         if orders_ids:
             self.env.cr.execute("""
-                select p.login as name, sum(l.qty*l.price_unit) as total, count(distinct o.id) as nombre
+                select p.login as name, sum(l.qty*l.price_unit*l.discount/100) as total, count(distinct o.id) as nombre
                 from res_users p, pos_order o, pos_order_line l
                 where l.order_id = o.id
                 and o.user_id = p.id
