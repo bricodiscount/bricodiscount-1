@@ -108,7 +108,7 @@ class HrPayslip(models.Model):
     @api.depends('brutp','netp','chargesalp','chargepatp','heuretp','heuresupp','congeacp','congepp','congerestp')
     def get_ruba(self):
         for record in self:
-            bula = self.env['hr.payslip'].search([('date_to','ilike',record.date_to[0:4]),('employee_id','=',record.employee_id.id)])
+            bula = self.env['hr.payslip'].search([('date_to','ilike',record.date_to.year),('employee_id','=',record.employee_id.id)])
             bruta = record.contract_id.bruti
             neta = record.contract_id.neti
             chargesala = record.contract_id.chargesali
