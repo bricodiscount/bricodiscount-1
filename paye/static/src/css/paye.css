@@ -42,7 +42,7 @@ background-color:#CCCCCC;
     text-align:center;
     vertical-align:center;
     background-color:#CCCCCC;
-    font-size:18px;
+    font-size:16px;
     font-family:cambria;
     padding-bottom:15px;
     padding-top:15px;
@@ -85,19 +85,19 @@ background-color:#CCCCCC;
     align:center
   }
   .sess{
-    font-size:18px;
+    font-size:16px;
     font-family:cambria;
     border: 1px solid #000;
     align:center
   }
  table tr td{
     border: 1px solid #000;
-    font-size:18px;
+    font-size:16px;
     font-family:cambria;
     padding: 5px 5px 5px 5px;
   }
   .infosg{
-    font-size:18px;
+    font-size:16px;
     font-family:cambria;
     float:left;
     width:60%;
@@ -106,7 +106,7 @@ border:1px solid #000;
 padding-left:10px;
   }
   .infosd{
-    font-size:18px;
+    font-size:16px;
     font-family:cambria;
     float:right;
     width:40%;
@@ -117,7 +117,7 @@ border-right:1px solid #000;
 padding-left:10px;
   }
   .nomemp{
-    font-size:18px;
+    font-size:16px;
     font-family:cambria;
     float:left;
     width:50%;
