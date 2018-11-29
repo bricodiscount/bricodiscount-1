@@ -61,29 +61,8 @@
                             <tr>
                                 <td>64510000</td>
                                 <td></td>
-                                <td>Cotisation CNSS / Part salariale</td>
-                                <td><span t-esc="'{:,.2f}'.format(o.cotsal).replace(',', ' ')"/></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>64510000</td>
-                                <td></td>
                                 <td>Cotisation CNSS / Part patronale</td>
                                 <td><span t-esc="'{:,.2f}'.format(o.cotpat).replace(',', ' ')"/></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>63100000</td>
-                                <td></td>
-                                <td>Impôts sur Rémunération</td>
-                                <td><span t-esc="'{:,.2f}'.format(o.sits).replace(',', ' ')"/></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>42100000</td>
-                                <td></td>
-                                <td>Remunération dûe / A retenir</td>
-                                <td><span t-esc="'{:,.2f}'.format(o.rdd).replace(',', ' ')"/></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -91,7 +70,7 @@
                                 <td>42100000</td>
                                 <td>Remunération dûe / A verser</td>
                                 <td></td>
-                                <td><span t-esc="'{:,.2f}'.format(o.rdc).replace(',', ' ')"/></td>
+                                <td><span t-esc="'{:,.2f}'.format(o.rdn).replace(',', ' ')"/></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -139,8 +118,8 @@
                                 <td></td>
                                 <td></td>
                                 <td>TOTAUX</td>
-                                <td><span t-esc="'{:,.2f}'.format(o.rd1+o.rd2+o.indf+o.cotsal+o.cotpat+o.sits+o.rdd).replace(',', ' ')"/></td>
-                                <td><span t-esc="'{:,.2f}'.format(o.rdc+o.cotsal+o.cotpat+o.sits+o.src+o.srm+o.sav).replace(',', ' ')"/></td>
+                                <td><span t-esc="'{:,.2f}'.format(o.rd1+o.rd2+o.indf+o.cotpat).replace(',', ' ')"/></td>
+                                <td><span t-esc="'{:,.2f}'.format(o.rdn+o.cotsal+o.cotpat+o.sits+o.src+o.srm+o.sav).replace(',', ' ')"/></td>
                             </tr>
                         </tbody>
                     </table>
