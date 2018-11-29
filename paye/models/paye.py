@@ -198,34 +198,34 @@ class hr_payslip_run(models.Model):
             for recordfil in record.slip_ids:
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['BSB','BSS','NHA','BHS','BCP']:
-                       rd1 = rd1 + round(recordfill.total)
+                       rd1 = rd1 + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['BPANC','BPC','BPN','BPRA','BPA','BPE']:
-                       rd2 = rd2 + round(recordfill.total)
+                       rd2 = rd2 + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['SINF']:
-                       indf = indf + round(recordfill.total)
+                       indf = indf + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['COTSAL']:
-                       cotsal = cotsal + round(recordfill.total)
+                       cotsal = cotsal + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['COTPAT']:
-                       cotpat = round(cotpat + recordfill.total)
+                       cotpat = round(cotpat + recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['SRC']:
-                       src = src + round(recordfill.total)
+                       src = src + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['SITS']:
-                       sits = sits + round(recordfill.total)
+                       sits = sits + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['SRM']:
-                       srm = srm + round(recordfill.total)
+                       srm = srm + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['SAV']:
-                       sav = sav + round(recordfill.total)
+                       sav = sav + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['NET']:
-                       rdn = rdn + round(recordfill.total)
+                       rdn = rdn + round(recordfill.total,0)
             rdc = rd1+rd2+indf
             cnsss = cotsal
             cnssp = cotpat
