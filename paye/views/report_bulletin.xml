@@ -20,13 +20,13 @@
                            <strong>Saline Ouest</strong><br/>
                            <strong>Djibouti</strong><br/>
                            <strong>SIRET: 00000002029218  Code NAF:</strong><br/>
-                           <strong>Urssaf:</strong><br/>
+                           <strong>Urssaf:</strong>
                     	</div> 
 						<div class="infosd">
                            <h3>BULLETIN DE SALAIRE</h3><br/>
                            Période: <strong><span t-esc="o.name[-12:]"/></strong><br/>
                            Paiement le : <strong><span t-esc="o.datep" t-esc-options='{"widget": "date"}'/></strong><br/>
-                           Du: <strong><span t-esc="o.date_from" t-esc-options='{"widget": "date"}'/></strong> Au: <strong><span t-esc="o.date_to" t-esc-options='{"widget": "date"}'/></strong><br/>
+                           Du: <strong><span t-esc="o.date_from" t-esc-options='{"widget": "date"}'/></strong> Au: <strong><span t-esc="o.date_to" t-esc-options='{"widget": "date"}'/></strong>
                     	</div>
                     </div>
                     <div class="nomemp"><span t-field="o.employee_id.name"/></div>
