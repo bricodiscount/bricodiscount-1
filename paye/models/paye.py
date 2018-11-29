@@ -225,7 +225,7 @@ class hr_payslip_run(models.Model):
                        sav = sav + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['NET']:
-                       rdn = rdn + round(recordfill.total,0)
+                       rdn = rdn + (round(recordfill.total/5,0))*5
             rdc = rd1+rd2+indf
             cnsss = cotsal
             cnssp = cotpat
