@@ -204,7 +204,7 @@ class hr_payslip_run(models.Model):
                        rd2 = rd2 + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['SINF']:
-                       indf = indf + round(recordfill.total,0)
+                       indf = indf + recordfill.total
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['COTSAL']:
                        cotsal = cotsal + round(recordfill.total,0)
