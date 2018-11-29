@@ -41,7 +41,7 @@
                                 <td>64110000</td>
                                 <td></td>
                                 <td>Salaires, Appointements</td>
-                                <td><span t-esc="'{:,.2f}'.format(o.rd1).replace(',', ' ')"/></td>
+                                <td><span t-esc="'{:,.2f}'.format(o.rdn+o.cotsal+o.sits+o.src+o.srm+o.sav-o.rd2-o.indf).replace(',', ' ')"/></td>
                                 <td></td>
                             </tr>
                             <tr>
