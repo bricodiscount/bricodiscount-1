@@ -186,6 +186,7 @@ class hr_payslip_run(models.Model):
     def centralise(self):
         rd1 = 0
         rd2 = 0
+        rdn = 0
         indf = 0
         cotsal = 0
         cotpat = 0
@@ -222,6 +223,9 @@ class hr_payslip_run(models.Model):
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['SAV']:
                        sav = sav + recordfill.total
+                for recordfill in recordfil.line_ids:
+                    if recordfill.code in ['NET']:
+                       rdn = rdn + recordfill.total
             rdc = rd1+rd2+indf
             cnsss = cotsal
             cnssp = cotpat
@@ -238,6 +242,7 @@ class hr_payslip_run(models.Model):
             record.sav = sav
             record.rdc = rdc
             record.rdd = rdd
+            record.rdn = rdn
     rd1 = fields.Float('Remunération base', compute='centralise', store=True)
     rd2 = fields.Float('Primes et gratifications', compute='centralise', store=True)
     indf = fields.Float('Indemnité forfaitaire', compute='centralise', store=True)
@@ -249,6 +254,7 @@ class hr_payslip_run(models.Model):
     sav = fields.Float('Avance et acompte', compute='centralise', store=True)
     rdc = fields.Float('Remunération directe crediteur', compute='centralise', store=True)
     rdd = fields.Float('Remunération directe debiteur', compute='centralise', store=True)
+    rdn = fields.Float('Remunération nette', compute='centralise', store=True)
 
 class ResourceMixin(models.AbstractModel):
     _name = "resource.mixin"
