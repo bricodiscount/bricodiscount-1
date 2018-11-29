@@ -23,7 +23,7 @@
                            <strong>Urssaf:</strong><br/>
                     	</div> 
 						<div class="infosd">
-                           <h1>BULLETIN DE SALAIRE</h1><br/>
+                           <h2>BULLETIN DE SALAIRE</h2><br/>
                            Période: <strong><span t-esc="o.name[-12:]"/></strong><br/>
                            Paiement le : <strong><span t-esc="o.datep" t-esc-options='{"widget": "date"}'/></strong><br/>
                            Du: <strong><span t-esc="o.date_from" t-esc-options='{"widget": "date"}'/></strong> Au: <strong><span t-esc="o.date_to" t-esc-options='{"widget": "date"}'/></strong><br/>
