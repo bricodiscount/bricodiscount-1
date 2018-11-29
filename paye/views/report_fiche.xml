@@ -41,28 +41,28 @@
                                 <td>64110000</td>
                                 <td></td>
                                 <td>Salaires, Appointements</td>
-                                <td><span t-esc="'{:,.2f}'.format(o.rdn+o.cotsal+o.sits+o.src+o.srm+o.sav-o.rd2-o.indf).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.rdn+o.cotsal+o.sits+o.src+o.srm+o.sav-o.rd2-o.indf).replace(',', ' ')"/></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>64130000</td>
                                 <td></td>
                                 <td>Primes et gratifications</td>
-                                <td><span t-esc="'{:,.2f}'.format(o.rd2).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.rd2).replace(',', ' ')"/></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>64140000</td>
                                 <td></td>
                                 <td>Indemintés et avantages divers</td>
-                                <td><span t-esc="'{:,.2f}'.format(o.indf).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.indf).replace(',', ' ')"/></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>64510000</td>
                                 <td></td>
                                 <td>Cotisation CNSS / Part patronale</td>
-                                <td><span t-esc="'{:,.2f}'.format(o.cotpat).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.cotpat).replace(',', ' ')"/></td>
                                 <td></td>
                             </tr>
                             <tr>
@@ -70,56 +70,56 @@
                                 <td>42100000</td>
                                 <td>Remunération dûe / A verser</td>
                                 <td></td>
-                                <td><span t-esc="'{:,.2f}'.format(o.rdn).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.rdn).replace(',', ' ')"/></td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>43100000</td>
                                 <td>Cotisation CNSS / Part salariale</td>
                                 <td></td>
-                                <td><span t-esc="'{:,.2f}'.format(o.cotsal).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.cotsal).replace(',', ' ')"/></td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>43100000</td>
                                 <td>Cotisation CNSS / Part patronale</td>
                                 <td></td>
-                                <td><span t-esc="'{:,.2f}'.format(o.cotpat).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.cotpat).replace(',', ' ')"/></td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>43720000</td>
                                 <td>Impôts, Traitements et salaires</td>
                                 <td></td>
-                                <td><span t-esc="'{:,.2f}'.format(o.sits).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.sits).replace(',', ' ')"/></td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>43720000</td>
                                 <td>Retenue Cimetière</td>
                                 <td></td>
-                                <td><span t-esc="'{:,.2f}'.format(o.src).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.src).replace(',', ' ')"/></td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>42510000</td>
                                 <td>Retenue Achat Brico Discount</td>
                                 <td></td>
-                                <td><span t-esc="'{:,.2f}'.format(o.srm).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.srm).replace(',', ' ')"/></td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>42500000</td>
                                 <td>Avance et acompte</td>
                                 <td></td>
-                                <td><span t-esc="'{:,.2f}'.format(o.sav).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.sav).replace(',', ' ')"/></td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td></td>
                                 <td>TOTAUX</td>
-                                <td><span t-esc="'{:,.2f}'.format(o.rd1+o.rd2+o.indf+o.cotpat).replace(',', ' ')"/></td>
-                                <td><span t-esc="'{:,.2f}'.format(o.rdn+o.cotsal+o.cotpat+o.sits+o.src+o.srm+o.sav).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.rdn+o.cotsal+o.cotpat+o.sits+o.src+o.srm+o.sav).replace(',', ' ')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(o.rdn+o.cotsal+o.cotpat+o.sits+o.src+o.srm+o.sav).replace(',', ' ')"/></td>
                             </tr>
                         </tbody>
                     </table>
