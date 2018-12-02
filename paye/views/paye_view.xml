@@ -137,7 +137,7 @@
                                    </notebook> 
                 </xpath>
                  <xpath expr="//button[@name='draft_payslip_run']" position="after"> 
-                     <button name="comptabiliser" type="object"  string="Comptabiliser"  attrs="{'invisible': [('compta', '!=', False)]}"/>
+                     <button name="comptabiliser" type="object"  string="Comptabiliser"/>
                 </xpath> 
                 <field name="credit_note" position="after">
                         <field name="compta" readonly="1"/>
