@@ -140,7 +140,7 @@
                      <button name="comptabiliser" type="object"  string="Comptabiliser" attrs="{'invisible': [('compta', '!=', False)]}"/>
                 </xpath> 
                 <field name="credit_note" position="after">
-                        <field name="compta"/>
+                        <field name="compta" readonly="1"/>
                         <field name="move_id"/>
                 </field>
             </field>
