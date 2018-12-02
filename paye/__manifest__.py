@@ -13,7 +13,7 @@ Gestion de la paie
     'author': 'HSN Consult',
     'category': 'Ressources humaines',
     'website': 'http://www.hsnconsult.com',
-    'depends': ['hr','hr_contract','hr_payroll','resource','base'],
+    'depends': ['hr','hr_contract','hr_payroll','resource','account'],
     'data': [
         'views/paye_view.xml',
         'views/paye_report.xml',
