@@ -72,6 +72,8 @@ class HrPayslip(models.Model):
             if record.contract_id and record.date_to:
                 debut = datetime.strptime(record.contract_id.date_start+' 00:00','%Y-%m-%d %H:%M')
                 fin = datetime.strptime(record.date_to+' 00:00','%Y-%m-%d %H:%M')
+                #debut = record.contract_id.date_start
+                #fin = record.date_to
                 record.ancannee = relativedelta(fin,debut).years
                 record.ancmois = relativedelta(fin,debut).months
     @api.depends('line_ids.total','worked_days_line_ids.number_of_days','input_line_ids.amount')
@@ -109,6 +111,7 @@ class HrPayslip(models.Model):
     def get_ruba(self):
         for record in self:
             bula = self.env['hr.payslip'].search([('date_to','ilike',record.date_to[0:4]),('employee_id','=',record.employee_id.id)])
+            #bula = self.env['hr.payslip'].search([('date_to','ilike',record.date_to.year),('employee_id','=',record.employee_id.id)])
             bruta = record.contract_id.bruti
             neta = record.contract_id.neti
             chargesala = record.contract_id.chargesali
@@ -184,6 +187,7 @@ class hr_payslip_run(models.Model):
     def centralise(self):
         rd1 = 0
         rd2 = 0
+        rdn = 0
         indf = 0
         cotsal = 0
         cotpat = 0
@@ -195,31 +199,34 @@ class hr_payslip_run(models.Model):
             for recordfil in record.slip_ids:
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['BSB','BSS','NHA','BHS','BCP']:
-                       rd1 = rd1 + recordfill.total
+                       rd1 = rd1 + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['BPANC','BPC','BPN','BPRA','BPA','BPE']:
-                       rd2 = rd2 + recordfill.total
+                       rd2 = rd2 + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['SINF']:
                        indf = indf + recordfill.total
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['COTSAL']:
-                       cotsal = cotsal + recordfill.total
+                       cotsal = cotsal + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['COTPAT']:
-                       cotpat = cotpat + recordfill.total
+                       cotpat = round(cotpat + recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['SRC']:
-                       src = src + recordfill.total
+                       src = src + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['SITS']:
-                       sits = sits + recordfill.total
+                       sits = sits + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['SRM']:
-                       srm = srm + recordfill.total
+                       srm = srm + round(recordfill.total,0)
                 for recordfill in recordfil.line_ids:
                     if recordfill.code in ['SAV']:
-                       sav = sav + recordfill.total
+                       sav = sav + round(recordfill.total,0)
+                for recordfill in recordfil.line_ids:
+                    if recordfill.code in ['NET']:
+                       rdn = rdn + (round(recordfill.total/5,0))*5
             rdc = rd1+rd2+indf
             cnsss = cotsal
             cnssp = cotpat
@@ -236,6 +243,99 @@ class hr_payslip_run(models.Model):
             record.sav = sav
             record.rdc = rdc
             record.rdd = rdd
+            record.rdn = rdn
+    def comptabiliser(self):
+        am = self.env['account.move']
+        aml = []
+        company = self.env.user.company_id
+        vals1 = {
+                'account_id':company.salap.id,
+                'name' : 'Salaires, Appointements',
+                'debit': round(self.rdn+self.cotsal+self.sits+self.src+self.srm+self.sav-self.rd2-self.indf,0),
+                'credit': 0,
+                }
+        aml.append((0, False, vals1))
+        vals2 = {
+                'account_id':company.prime.id,
+                'name' : 'Primes et gratifications',
+                'debit': round(self.rd2,0),
+                'credit': 0,
+                }
+        aml.append((0, False, vals2))
+        vals3 = {
+                'account_id':company.ind.id,
+                'name' : 'Indemintés et avantages divers',
+                'debit': round(self.indf,0),
+                'credit': 0,
+                }
+        aml.append((0, False, vals3))
+        vals4 = {
+                'account_id':company.cnsspat.id,
+                'name' : 'Cotisation CNSS / Part patronale',
+                'debit': round(self.cotpat,0),
+                'credit': 0,
+                }
+        aml.append((0, False, vals4))
+        vals5 = {
+                'account_id':company.remdu.id,
+                'name' : 'Remunération dûe / A verser',
+                'debit': 0,
+                'credit': round(self.rdn,0),
+                }
+        aml.append((0, False, vals5))
+        vals6 = {
+                'account_id':company.cnsssal.id,
+                'name' : 'Cotisation CNSS / Part salariale',
+                'debit': 0,
+                'credit': round(self.cotsal,0),
+                }
+        aml.append((0, False, vals6))
+        vals7 = {
+                'account_id':company.cnsspatc.id,
+                'name' : 'Cotisation CNSS / Part patronale',
+                'debit': 0,
+                'credit': round(self.cotpat,0),
+                }
+        aml.append((0, False, vals7))
+        vals8 = {
+                'account_id':company.impot.id,
+                'name' : 'Impôts, Traitements et salaires',
+                'debit': 0,
+                'credit': round(self.sits,0),
+                }
+        aml.append((0, False, vals8))
+        vals9 = {
+                'account_id':company.retc.id,
+                'name' : 'Retenue Cimetière',
+                'debit': 0,
+                'credit': round(self.src,0),
+                }
+        aml.append((0, False, vals9))
+        vals10 = {
+                'account_id':company.retachat.id,
+                'name' : 'Retenue Achat Brico Discount',
+                'debit': 0,
+                'credit': round(self.srm,0),
+                }
+        aml.append((0, False, vals10))
+        vals11 = {
+                'account_id':company.avance.id,
+                'name' : 'Avance et acompte',
+                'debit': 0,
+                'credit': round(self.sav,0),
+                }
+        aml.append((0, False, vals11))
+
+
+        amc = am.create({'journal_id':company.journalpaie.id,'date':self.date_end,'ref':self.name})
+        for record in amc:
+            record.write({'line_ids':aml})
+            #record.post()
+        self.write({'compta':True})
+        self.write({'move_id': amc.id})
+        return True
+    compta = fields.Boolean("Comptabilisé", default = False)
+    move_id = fields.Many2one('account.move', 'Accounting Entry', readonly=True, copy=False)
     rd1 = fields.Float('Remunération base', compute='centralise', store=True)
     rd2 = fields.Float('Primes et gratifications', compute='centralise', store=True)
     indf = fields.Float('Indemnité forfaitaire', compute='centralise', store=True)
@@ -247,6 +347,7 @@ class hr_payslip_run(models.Model):
     sav = fields.Float('Avance et acompte', compute='centralise', store=True)
     rdc = fields.Float('Remunération directe crediteur', compute='centralise', store=True)
     rdd = fields.Float('Remunération directe debiteur', compute='centralise', store=True)
+    rdn = fields.Float('Remunération nette', compute='centralise', store=True)
 
 class ResourceMixin(models.AbstractModel):
     _name = "resource.mixin"
@@ -271,3 +372,21 @@ class ResourceMixin(models.AbstractModel):
             'days':30,
             'hours':208,
         }
+
+class Company(models.Model):
+    _name = "res.company"
+    _description = 'Companies'
+    _inherit = "res.company"
+
+    journalpaie = fields.Many2one('account.journal',string='Journal des salaires')
+    salap = fields.Many2one('account.account',string='Salaire et appointement')
+    prime = fields.Many2one('account.account',string='Primes et gratifications')
+    ind = fields.Many2one('account.account',string='Indemnités et avantages')
+    cnsspat = fields.Many2one('account.account',string='CNSS Patronale Débit')
+    cnsssal = fields.Many2one('account.account',string='CNSS Salariale')
+    remdu = fields.Many2one('account.account',string='Rémunération dûe')
+    cnsspatc = fields.Many2one('account.account',string='CNSS Patronale Crédit')
+    impot = fields.Many2one('account.account',string='Impôts et traitements')
+    retc = fields.Many2one('account.account',string='Retenue cimetière')
+    retachat = fields.Many2one('account.account',string='Retenue achat')
+    avance = fields.Many2one('account.account',string='Avances et acomptes')
