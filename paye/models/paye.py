@@ -279,3 +279,21 @@ class ResourceMixin(models.AbstractModel):
             'days':30,
             'hours':208,
         }
+    
+class Company(models.Model):
+    _name = "res.company"
+    _description = 'Companies'
+    _inherit = "res.company"
+
+    journalpaie = fields.Many2one('account.journal',string='Journal des salaires')
+    salap = fields.Many2one('account.account',string='Salaire et appointement')
+    prime = fields.Many2one('account.account',string='Primes et gratifications')
+    ind = fields.Many2one('account.account',string='Indemnités et avantages')
+    cnsspat = fields.Many2one('account.account',string='CNSS Patronale Débit')
+    cnsssal = fields.Many2one('account.account',string='CNSS Salariale')
+    remdu = fields.Many2one('account.account',string='Rémunération dûe')
+    cnsspatc = fields.Many2one('account.account',string='CNSS Patronale Crédit')
+    impot = fields.Many2one('account.account',string='Impôts et traitements')
+    retc = fields.Many2one('account.account',string='Retenue cimetière')
+    retachat = fields.Many2one('account.account',string='Retenue achat')
+    avance = fields.Many2one('account.account',string='Avances et acomptes')
