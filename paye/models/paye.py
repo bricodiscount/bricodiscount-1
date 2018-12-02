@@ -70,10 +70,10 @@ class HrPayslip(models.Model):
     def get_anc(self):
         for record in self:
             if record.contract_id and record.date_to:
-                debut = datetime.strptime(record.contract_id.date_start+' 00:00','%Y-%m-%d %H:%M')
-                fin = datetime.strptime(record.date_to+' 00:00','%Y-%m-%d %H:%M')
-                #debut = record.contract_id.date_start
-                #fin = record.date_to
+                #debut = datetime.strptime(record.contract_id.date_start+' 00:00','%Y-%m-%d %H:%M')
+                #fin = datetime.strptime(record.date_to+' 00:00','%Y-%m-%d %H:%M')
+                debut = record.contract_id.date_start
+                fin = record.date_to
                 record.ancannee = relativedelta(fin,debut).years
                 record.ancmois = relativedelta(fin,debut).months
     @api.depends('line_ids.total','worked_days_line_ids.number_of_days','input_line_ids.amount')
@@ -110,8 +110,8 @@ class HrPayslip(models.Model):
     @api.depends('brutp','netp','chargesalp','chargepatp','heuretp','heuresupp','congeacp','congepp','congerestp')
     def get_ruba(self):
         for record in self:
-            bula = self.env['hr.payslip'].search([('date_to','ilike',record.date_to[0:4]),('employee_id','=',record.employee_id.id)])
-            #bula = self.env['hr.payslip'].search([('date_to','ilike',record.date_to.year),('employee_id','=',record.employee_id.id)])
+            #bula = self.env['hr.payslip'].search([('date_to','ilike',record.date_to[0:4]),('employee_id','=',record.employee_id.id)])
+            bula = self.env['hr.payslip'].search([('date_to','ilike',record.date_to.year),('employee_id','=',record.employee_id.id)])
             bruta = record.contract_id.bruti
             neta = record.contract_id.neti
             chargesala = record.contract_id.chargesali
