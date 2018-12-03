@@ -25,8 +25,8 @@ class PosOrder(models.Model):
             pos_order['pos_session_id'] = self._get_valid_session(pos_order).id
         order = self.create(self._order_fields(pos_order))
         journal_ids = set()
-        for payments in pos_order['statement_ids']:
-            if not float_is_zero(payments[2]['amount'], precision_digits=prec_acc):
+        #for payments in pos_order['statement_ids']:
+        #    if not float_is_zero(payments[2]['amount'], precision_digits=prec_acc):
             #    order.add_payment(self._payment_fields(payments[2]))
             #journal_ids.add(payments[2]['journal_id'])
             #    order.add_payment({
