@@ -88,7 +88,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td>43720000</td>
+                                <td>44200000</td>
                                 <td>Impôts, Traitements et salaires</td>
                                 <td></td>
                                 <td align="right"><span t-esc="'{:,.0f}'.format(o.sits).replace(',', ' ')"/></td>
