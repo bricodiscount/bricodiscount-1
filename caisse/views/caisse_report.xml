@@ -21,7 +21,7 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">caisse.report_vendeurs</field>
     </record>
-    <record id="sale_stoks_report" model="ir.actions.report">
+    <record id="sale_stocks_report" model="ir.actions.report">
         <field name="name">Etat stocks</field>
         <field name="model">report.caisse.report_stocks</field>
         <field name="report_type">qweb-pdf</field>
