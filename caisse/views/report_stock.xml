@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="report_stocks">
+    <t t-call="web.html_container">
+    <t t-call="web.internal_layout">
+            <div class="page">
+                <h2><span t-esc="res_company.name"/>: Mouvements des stocks du <t t-esc="date_start" t-options="{'widget': 'datetime'}"/> au <t t-esc="date_stop" t-options="{'widget': 'datetime'}"/></h2><br/>
+                <t t-if="location">Emplacement: <span t-esc="location" /></t>
+
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Produit</th>
+                            <th>Stock initial</th>
+                            <th>Quantité reçue</th>
+                            <th>Quantité livrée</th>
+                            <th>Stock final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="alines" t-as="aline">
+                            <tr>
+                                <td><span t-esc="aline['produit']"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(aline['stinit']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(aline['qteent']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(aline['qtesort']).replace(',', ' ').replace('.', ',')"/></td>
+                                <td align="right"><span t-esc="'{:,.0f}'.format(aline['stfinal']).replace(',', ' ').replace('.', ',')"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </t>
+</template>
+</odoo>
