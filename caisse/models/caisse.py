@@ -315,3 +315,97 @@ class ReportVendeurs(models.AbstractModel):
         data.update(self.get_vendeurs(data['date_start'], data['date_stop'], configs))
         #raise UserError(_(data))
         return data
+
+class ReportStocks(models.AbstractModel):
+
+    _name = 'report.caisse.report_stocks'
+
+
+    @api.model
+    def get_stocks(self, date_start=False, date_stop=False, location=False):
+
+
+        date_start = fields.Datetime.to_string(date_start)
+        date_stop = fields.Datetime.to_string(date_stop)
+
+        cr = self.env.cr
+        #location = location[0]
+        requete = "with sinite as " \
+                  "(SELECT product_id, sum(qty_done) as inite " \
+                  "from stock_move_line " \
+                  "where location_dest_id = '"+str(location[0])+"' " \
+                  "and date < '"+date_start+"' " \
+                  "group by product_id), " \
+                  "sinits as " \
+                  "(SELECT product_id, sum(qty_done) as inits " \
+                  "from stock_move_line " \
+                  "where location_id = '"+str(location[0])+"' " \
+                  "and date < '"+date_start+"' " \
+                  "group by product_id), " \
+                  "init as( " \
+                  "select p.id, sinite.inite, sinits.inits " \
+                  "from product_product p " \
+                  "left join  sinite " \
+                  "on p.id = sinite.product_id " \
+                  "left join sinits " \
+                  "on p.id = sinits.product_id), " \
+                  "entree as " \
+                  "(select product_id, sum(qty_done) as qteent " \
+                  "from stock_move_line " \
+                  "where location_dest_id = '"+str(location[0])+"' " \
+                  "and date between '"+date_start+"' AND '"+date_end+"' " \
+                  "group by product_id), " \
+                  "sortie as " \
+                  "(select product_id, sum(qty_done) as qtesort " \
+                  "from stock_move_line " \
+                  "where location_id = '"+str(location[0])+"' " \
+                  "and date between '"+date_start+"' AND '"+date_end+"' " \
+                  "group by product_id), " \
+                  "finale as " \
+                  "(SELECT product_id, sum(qty_done) as sfinale " \
+                  "from stock_move_line " \
+                  "where location_dest_id = '"+str(location[0])+"' " \
+                  "and date <= '"+fin+"' " \
+                  "group by product_id), " \
+                  "finals as " \
+                  "(SELECT product_id, sum(qty_done) as sfinals " \
+                  "from stock_move_line " \
+                  "where location_id = '"+str(location[0])+"' " \
+                  "and date <= '"+fin+"' " \
+                  "group by product_id), " \
+                  "final as( " \
+                  "select p.id, finale.sfinale, finals.sfinals " \
+                  "from product_product p " \
+                  "left join  finale " \
+                  "on p.id = finale.product_id " \
+                  "left join finals " \
+                  "on p.id = finals.product_id) " \
+                  "select pr.name as produit, coalesce(si.inite,0)-coalesce(si.inits,0) as stinit, coalesce(entree.qteent,0) as qteent, coalesce(sortie.qtesort,0) as qtesort, coalesce(final.sfinale,0)-coalesce(final.sfinals,0) as stfinal " \
+                  "from product_product p " \
+                  "left join product_template pr " \
+                  "on p.product_tmpl_id = pr.id " \
+                  "left join init si " \
+                  "on p.id = si.id " \
+                  "left join entree " \
+                  "on p.id = entree.product_id " \
+                  "left join sortie " \
+                  "on p.id = sortie.product_id " \
+                  "left join final " \
+                  "on p.id = final.id " \
+                  "left join product_category cat " \
+                  "on pr.categ_id = cat.id " \
+                  "where cat.name in ('Carburant','Gaz') " \
+                  "order by cat.name"
+        cr.execute(requete)
+        alines = cr.dictfetchall()
+        return {
+            'alines': alines,
+            'company_name': self.env.user.company_id.name,
+        }
+
+    @api.multi
+    def _get_report_values(self, docids, data=None):
+        data = dict(data or {})
+        data.update(self.get_stocks(data['date_start'], data['date_stop'] ,data['location'], configs))
+        #raise UserError(_(data))
+        return data
