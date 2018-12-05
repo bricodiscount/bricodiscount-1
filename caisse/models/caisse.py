@@ -433,8 +433,8 @@ class ReportVentes(models.AbstractModel):
                   "AND p.product_tmpl_id = pr.id " \
                   "AND l.order_id = po.id " \
                   "AND i.name = 'standard_price' " \
-                  "AND p.id = cast(substring(i.res_id,17,2) as integer) " \
-                  "AND po.date_order BETWEEN '"+date_start+"' AND '"+date_stop+"'"
+                  "AND p.id = cast(substring(i.res_id,17,2) as integer)"
+                  #"AND po.date_order BETWEEN '"+date_start+"' AND '"+date_stop+"'"
         #raise UserError(_(requete))
         cr.execute(requete)
         alines = cr.dictfetchall()
