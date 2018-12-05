@@ -327,7 +327,7 @@ class ReportStocks(models.AbstractModel):
 
         #date_start = fields.Datetime.to_string(date_start)
         #date_stop = fields.Datetime.to_string(date_stop)
-
+        raise UserError(_(location.id))
         cr = self.env.cr
         #location = location[0]
         requete = "with sinite as " \
