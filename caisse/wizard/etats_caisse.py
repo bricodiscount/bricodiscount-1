@@ -146,6 +146,24 @@ class PosVendeurs(models.TransientModel):
         return self.env.ref('caisse.sale_vendeurs_report').report_action([], data=data)
 
 
+class PosVentes(models.TransientModel):
+    _name = 'pos.ventes.wizard'
+    _description = 'Etat des ventes'
+
+
+    start_date = fields.Date('Date', required=True, default=fields.Datetime.now)
+
+
+    @api.multi
+    def generate_report(self):
+        if (not self.env.user.company_id.logo):
+            raise UserError(_("You have to set a logo or a layout for your company."))
+        elif (not self.env.user.company_id.external_report_layout_id):
+            raise UserError(_("You have to set your reports's header and footer layout."))
+        data = {'date_start': self.start_date}
+        return self.env.ref('caisse.sale_ventes_report').report_action([], data=data)
+
+   
 class PosStocks(models.TransientModel):
     _name = 'pos.stocks.wizard'
     _description = 'Etat des stocks'
