@@ -151,7 +151,8 @@ class PosVentes(models.TransientModel):
     _description = 'Etat des ventes'
 
 
-    start_date = fields.Date('Date', required=True, default=fields.Datetime.now)
+    start_date = fields.Date('Début', required=True, default=fields.Datetime.now)
+    end_date = fields.Date('Fin', required=True, default=fields.Datetime.now)
 
 
     @api.multi
@@ -160,7 +161,7 @@ class PosVentes(models.TransientModel):
             raise UserError(_("You have to set a logo or a layout for your company."))
         elif (not self.env.user.company_id.external_report_layout_id):
             raise UserError(_("You have to set your reports's header and footer layout."))
-        data = {'date_start': self.start_date}
+        data = {'date_start': self.start_date,'date_stop': self.end_date}
         return self.env.ref('caisse.sale_ventes_report').report_action([], data=data)
 
    
