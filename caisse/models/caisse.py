@@ -427,9 +427,10 @@ class ReportVentes(models.AbstractModel):
         #raise UserError(_(location.id))
         cr = self.env.cr
         #location = location[0]
-        requete = "SELECT p.barcode, p.name as produit, l.qty as quantite, l.standard_price as prixrevient, l.price_unit as prixvente, l.price_unit-l.standard_price as margeunit, (l.price_unit-l.standard_price)*l.qty as margetot, l.qty*l.price_unit as ventetot " \
-                  "FROM product_product p, pos_order_line l, pos_order po " \
+        requete = "SELECT p.barcode, pr.name as produit, l.qty as quantite, l.standard_price as prixrevient, l.price_unit as prixvente, l.price_unit-l.standard_price as margeunit, (l.price_unit-l.standard_price)*l.qty as margetot, l.qty*l.price_unit as ventetot " \
+                  "FROM product_product p, pos_order_line l, pos_order po, product_template pr " \
                   "WHERE l.product_id = p.id " \
+                  "AND p.product_tmpl_id = pr.id " \
                   "AND l.order_id = po.id " \
                   "AND po.date_order BETWEEN '"+date_start+"' AND '"+date_stop+"'"
         #raise UserError(_(requete))
