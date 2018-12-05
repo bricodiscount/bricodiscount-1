@@ -6,7 +6,7 @@
     <t t-call="web.internal_layout">
             <div class="page">
                 <h3><span t-esc="res_company.name"/>: Mouvements des stocks du <t t-esc="date_start" t-options="{'widget': 'datetime'}"/> au <t t-esc="date_stop" t-options="{'widget': 'datetime'}"/></h3><br/>
-                <t t-if="location">Emplacement: <span t-esc="location" /></t>
+                <t t-if="location">Emplacement: <span t-esc="nomlocation" /></t>
 
                 <table class="table table-condensed">
                     <thead>
