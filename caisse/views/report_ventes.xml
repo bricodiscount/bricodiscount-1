@@ -43,9 +43,9 @@
                             <t t-set="ventecash" t-value="ventecash+aline['totvente']"/>
                             <t t-set="margecash" t-value="margecash+aline['margetot']"/>
                         </t>
-                            <tr><td colspan="6" style="background-color:#ccc;font-weigth:bold;">Sous Total POS-Cash</td>
-                                <td><span t-esc="'{:,.0f}'.format(margecash).replace(',', ' ').replace('.', ',')"/></td>
-                                <td><span t-esc="'{:,.0f}'.format(ventecash).replace(',', ' ').replace('.', ',')"/></td>
+                            <tr><td colspan="6" style="background-color:#ccc;font-weight:bold;fon-size:16px;">Sous Total POS-Cash</td>
+                                <td style="background-color:#ccc;font-weight:bold;fon-size:16px;"><span t-esc="'{:,.0f}'.format(margecash).replace(',', ' ').replace('.', ',')"/></td>
+                                <td style="background-color:#ccc;font-weight:bold;fon-size:16px;"><span t-esc="'{:,.0f}'.format(ventecash).replace(',', ' ').replace('.', ',')"/></td>
                             </tr>
                         
                         <t t-set="margecredit" t-value="0"/>
@@ -70,13 +70,13 @@
                             <t t-set="ventecredit" t-value="ventecredit+aline['totvente']"/>
                             <t t-set="margecredit" t-value="margecredit+aline['margetot']"/>
                         </t>
-                            <tr><td colspan="6" style="background-color:#ccc;font-weigth:bold;">Sous Total POS-Crédit</td>
-                                <td><span t-esc="'{:,.0f}'.format(margecredit).replace(',', ' ').replace('.', ',')"/></td>
-                                <td><span t-esc="'{:,.0f}'.format(ventecredit).replace(',', ' ').replace('.', ',')"/></td>
+                            <tr><td colspan="6" style="background-color:#ccc;font-weight:bold;fon-size:16px;">Sous Total POS-Crédit</td>
+                                <td style="background-color:#ccc;font-weight:bold;fon-size:16px;"><span t-esc="'{:,.0f}'.format(margecredit).replace(',', ' ').replace('.', ',')"/></td>
+                                <td style="background-color:#ccc;font-weight:bold;fon-size:16px;"><span t-esc="'{:,.0f}'.format(ventecredit).replace(',', ' ').replace('.', ',')"/></td>
                             </tr>
-                             <tr><td colspan="6" style="background-color:#ccc;font-weigth:bold;">Grand Total</td>
-                                <td><span t-esc="'{:,.0f}'.format(margecash+margecredit).replace(',', ' ').replace('.', ',')"/></td>
-                                <td><span t-esc="'{:,.0f}'.format(ventecash+ventecredit).replace(',', ' ').replace('.', ',')"/></td>
+                             <tr><td colspan="6" style="background-color:#ccc;font-weight:bold;">Grand Total</td>
+                                <td style="background-color:#ccc;font-weight:bold;fon-size:16px;"><span t-esc="'{:,.0f}'.format(margecash+margecredit).replace(',', ' ').replace('.', ',')"/></td>
+                                <td style="background-color:#ccc;font-weight:bold;fon-size:16px;"><span t-esc="'{:,.0f}'.format(ventecash+ventecredit).replace(',', ' ').replace('.', ',')"/></td>
                             </tr>
                     </tbody>
                 </table>
