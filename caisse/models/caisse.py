@@ -413,36 +413,3 @@ class ReportStocks(models.AbstractModel):
         #raise UserError(_(data))
         return data
 
-class ReportVentes(models.AbstractModel):
-
-    _name = 'report.caisse.report_ventes'
-
-
-    @api.model
-    def get_ventes(self, date_start=False, date_stop=False):
-
-
-        #date_start = fields.Datetime.to_string(date_start)
-        #date_stop = fields.Datetime.to_string(date_stop)
-        #raise UserError(_(location.id))
-        cr = self.env.cr
-        #location = location[0]
-        requete = "SELECT p.barcode, p.name as produit, l.qty as quantite, l.standard_price as prixrevient, l.price_unit as prixvente, l.price_unit-l.standard_price as margeunit, (l.price_unit-l.standard_price)*l.qty as margetot, l.qty*l.price_unit as ventetot " \  
-                  "FROM product_product p, pos_order_line l, pos_order po " \
-                  "WHERE l.product_id = p.id " \
-                  "AND l.order_id = po.id " \
-                  "AND po.date_order BETWEEN '"+date_start+"' AND '"+date_stop+"'"
-        #raise UserError(_(requete))
-        cr.execute(requete)
-        alines = cr.dictfetchall()
-        return {
-            'alines': alines,
-            'company_name': self.env.user.company_id.name,
-        }
-
-    @api.multi
-    def _get_report_values(self, docids, data=None):
-        data = dict(data or {})
-        data.update(self.get_ventes(data['date_start'], data['date_stop']))
-        #raise UserError(_(data))
-        return data
