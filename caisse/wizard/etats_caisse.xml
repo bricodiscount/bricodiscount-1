@@ -109,5 +109,5 @@
         <menuitem id="menu_report_vendeurs" name="Etat par vendeur" action="action_report_pos_vendeurs" parent="point_of_sale.menu_point_rep" sequence="5"/>
         <menuitem id="menu_report_vendeursdet" name="Etat détaillé vendeur" action="action_report_pos_vendeursdet" parent="point_of_sale.menu_point_rep" sequence="7"/>
         <menuitem id="menu_report_rayonsdet" name="Etat par rayon" action="action_report_pos_rayonsdet" parent="point_of_sale.menu_point_rep" sequence="9"/>
-        <menuitem id="menu_report_stocks" name="Etat Stocks" action="action_report_pos_stocks" parent="stock.menu_warehouse_report" sequence="200"/>
+        <menuitem id="menu_report_stocks" name="Etat Stocks" action="action_report_pos_stocks" parent="stock.menu_warehouse_report" sequence="200" groups="caisse.group_caisse_stock"/>
 </odoo>
