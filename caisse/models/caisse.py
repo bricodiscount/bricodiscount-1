@@ -353,13 +353,13 @@ class ReportStocks(models.AbstractModel):
                   "(select product_id, sum(qty_done) as qteent " \
                   "from stock_move_line " \
                   "where location_dest_id = '"+str(location[0])+"' " \
-                  "and date between '"+date_start+"' AND '"+date_end+"' " \
+                  "and date between '"+date_start+"' AND '"+date_stop+"' " \
                   "group by product_id), " \
                   "sortie as " \
                   "(select product_id, sum(qty_done) as qtesort " \
                   "from stock_move_line " \
                   "where location_id = '"+str(location[0])+"' " \
-                  "and date between '"+date_start+"' AND '"+date_end+"' " \
+                  "and date between '"+date_start+"' AND '"+date_stop+"' " \
                   "group by product_id), " \
                   "finale as " \
                   "(SELECT product_id, sum(qty_done) as sfinale " \
