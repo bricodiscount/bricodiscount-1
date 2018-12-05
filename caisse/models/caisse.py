@@ -384,7 +384,7 @@ class ReportStocks(models.AbstractModel):
                   "on p.id = finale.product_id " \
                   "left join finals " \
                   "on p.id = finals.product_id) " \
-                  "select pr.barcode, pr.name as produit, coalesce(si.inite,0)-coalesce(si.inits,0) as stinit, coalesce(entree.qteent,0) as qteent, coalesce(sortie.qtesort,0) as qtesort, coalesce(final.sfinale,0)-coalesce(final.sfinals,0) as stfinal " \
+                  "select p.barcode, pr.name as produit, coalesce(si.inite,0)-coalesce(si.inits,0) as stinit, coalesce(entree.qteent,0) as qteent, coalesce(sortie.qtesort,0) as qtesort, coalesce(final.sfinale,0)-coalesce(final.sfinals,0) as stfinal " \
                   "from product_product p " \
                   "left join product_template pr " \
                   "on p.product_tmpl_id = pr.id " \
