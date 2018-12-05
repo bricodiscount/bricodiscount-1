@@ -392,6 +392,7 @@ class ReportStocks(models.AbstractModel):
                   "on p.id = sortie.product_id " \
                   "left join final " \
                   "on p.id = final.id " \
+                  "where entree.qteent+sortie.qtesort != 0 " \
                   "order by pr.name"
         #raise UserError(_(requete))
         cr.execute(requete)
