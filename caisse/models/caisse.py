@@ -427,13 +427,13 @@ class ReportVentes(models.AbstractModel):
         #raise UserError(_(location.id))
         cr = self.env.cr
         #location = location[0]
-        requete = "SELECT p.barcode, pr.name as produit, l.qty as quantite, l.qty as prixrevient, l.price_unit as prixvente, l.price_unit-l.qty as margeunit, (l.price_unit-l.qty)*l.qty as margetot, l.qty*l.price_unit as totvente " \
-                  "FROM product_product p, pos_order_line l, pos_order po, product_template pr " \
+        requete = "SELECT p.barcode, pr.name as produit, l.qty as quantite, i.value_float as prixrevient, l.price_unit as prixvente, l.price_unit-i.value_float as margeunit, (l.price_unit-i.value_float)*l.qty as margetot, l.qty*l.price_unit as totvente " \
+                  "FROM product_product p, pos_order_line l, pos_order po, product_template pr, ir_property i " \
                   "WHERE l.product_id = p.id " \
                   "AND p.product_tmpl_id = pr.id " \
-                  "AND l.order_id = po.id"
-                  #"AND i.name = 'standard_price'"
-                  #"AND p.id = cast(substring(i.res_id,17,2) as integer)"
+                  "AND l.order_id = po.id " \
+                  "AND i.name = 'standard_price' " \
+                  "AND p.id = cast(substring(i.res_id,17,4) as integer)"
                   #"AND po.date_order BETWEEN '"+date_start+"' AND '"+date_stop+"'"
         #raise UserError(_(requete))
         cr.execute(requete)
