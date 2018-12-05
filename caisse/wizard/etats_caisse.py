@@ -151,8 +151,8 @@ class PosVentes(models.TransientModel):
     _description = 'Etat des ventes'
 
 
-    start_date = fields.Date('Début', required=True, default=fields.Datetime.now)
-    end_date = fields.Date('Fin', required=True, default=fields.Datetime.now)
+    start_date = fields.Date('Début', required=True)
+    end_date = fields.Date('Fin', required=True)
 
 
     @api.multi
