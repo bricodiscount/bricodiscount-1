@@ -407,6 +407,6 @@ class ReportStocks(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         data = dict(data or {})
         location = self.env['stock.location'].browse(data['location'])
-        data.update(self.get_stocks(data['date_start'], data['date_stop'] ,location))
+        data.update(self.get_stocks(data['date_start'], data['date_stop'] ,location[0]))
         #raise UserError(_(data))
         return data
