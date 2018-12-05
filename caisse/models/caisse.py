@@ -382,6 +382,7 @@ class ReportStocks(models.AbstractModel):
                   "on p.id = finals.product_id) " \
                   "select pr.name as produit, coalesce(si.inite,0)-coalesce(si.inits,0) as stinit, coalesce(entree.qteent,0) as qteent, coalesce(sortie.qtesort,0) as qtesort, coalesce(final.sfinale,0)-coalesce(final.sfinals,0) as stfinal " \
                   "from product_product p " \
+                  "where entree.qteent+sortie.qtesort != 0 " \
                   "left join product_template pr " \
                   "on p.product_tmpl_id = pr.id " \
                   "left join init si " \
@@ -392,7 +393,6 @@ class ReportStocks(models.AbstractModel):
                   "on p.id = sortie.product_id " \
                   "left join final " \
                   "on p.id = final.id " \
-                  "where entree.qteent+sortie.qtesort != 0 " \
                   "order by pr.name"
         #raise UserError(_(requete))
         cr.execute(requete)
