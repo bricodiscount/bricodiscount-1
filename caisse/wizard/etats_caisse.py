@@ -151,8 +151,8 @@ class PosStocks(models.TransientModel):
     _description = 'Etat des stocks'
 
 
-    start_date = fields.Datetime(required=True, default=fields.Datetime.now)
-    end_date = fields.Datetime(required=True, default=fields.Datetime.now)
+    start_date = fields.Datetime('Date début', required=True, default=fields.Datetime.now)
+    end_date = fields.Datetime('Date fin', required=True, default=fields.Datetime.now)
     location = fields.Many2one('stock.location', 'Emplacement')
     avecm = fields.Boolean('Mouvementé', default=False)
 
