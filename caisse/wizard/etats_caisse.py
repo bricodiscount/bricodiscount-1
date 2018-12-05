@@ -161,7 +161,7 @@ class PosVentes(models.TransientModel):
             raise UserError(_("You have to set a logo or a layout for your company."))
         elif (not self.env.user.company_id.external_report_layout_id):
             raise UserError(_("You have to set your reports's header and footer layout."))
-        data = {'date_start': self.start_date,'date_stop': self.end_date}
+        data = {'date_start': self.start_date+' 00:00:00','date_stop': self.end_date+' 23:59:59'}
         return self.env.ref('caisse.sale_ventes_report').report_action([], data=data)
 
    
