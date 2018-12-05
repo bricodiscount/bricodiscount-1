@@ -22,6 +22,7 @@ Gestion de la paie
         'views/report_vendeurs.xml',
         'views/report_rayonsdet.xml',
         'views/report_stock.xml',
+        'views/report_ventes.xml',
         ],
     'installable': True,
     'application': True,
