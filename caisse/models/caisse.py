@@ -438,8 +438,20 @@ class ReportVentes(models.AbstractModel):
         #raise UserError(_(requete))
         cr.execute(requete)
         alines = cr.dictfetchall()
+        requete2 = "SELECT p.barcode, pr.name as produit, l.product_uom_qty as quantite, i.value_float as prixrevient, l.price_unit-(l.price_unit*l.discount/100) as prixvente, l.price_unit-(l.price_unit*l.discount/100)-i.value_float as margeunit, (l.price_unit-(l.price_unit*l.discount/100)-i.value_float)*l.product_uom_qty as margetot, l.product_uom_qty*(l.price_unit-(l.price_unit*l.discount/100)) as totvente " \
+                  "FROM product_product p, sale_order_line l, sale_order po, product_template pr, ir_property i " \
+                  "WHERE l.product_id = p.id " \
+                  "AND p.product_tmpl_id = pr.id " \
+                  "AND l.order_id = po.id " \
+                  "AND i.name = 'standard_price' " \
+                  "AND p.id = cast(substring(i.res_id,17,4) as integer) " \
+                  "AND po.confirmation_date BETWEEN '"+date_start+"' AND '"+date_stop+"'"
+        #raise UserError(_(requete2))
+        cr.execute(requete2)
+        clines = cr.dictfetchall()
         return {
             'alines': alines,
+            'clines': clines,
             'company_name': self.env.user.company_id.name,
         }
 
