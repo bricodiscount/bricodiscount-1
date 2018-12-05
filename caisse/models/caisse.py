@@ -329,7 +329,7 @@ class ReportStocks(models.AbstractModel):
         #date_stop = fields.Datetime.to_string(date_stop)
         #raise UserError(_(location.id))
         if avecm:
-           cond = " where entree.qteent+sortie.qtesort != 0 " 
+           cond = " where (coalesce(entree.qteent,0)+coalesce(sortie.qtesort,0)) != 0 " 
         else:
            cond = " " 
         cr = self.env.cr
