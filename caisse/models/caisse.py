@@ -365,13 +365,13 @@ class ReportStocks(models.AbstractModel):
                   "(SELECT product_id, sum(qty_done) as sfinale " \
                   "from stock_move_line " \
                   "where location_dest_id = '"+str(location[0])+"' " \
-                  "and date <= '"+fin+"' " \
+                  "and date <= '"+date_stop+"' " \
                   "group by product_id), " \
                   "finals as " \
                   "(SELECT product_id, sum(qty_done) as sfinals " \
                   "from stock_move_line " \
                   "where location_id = '"+str(location[0])+"' " \
-                  "and date <= '"+fin+"' " \
+                  "and date <= '"+date_stop+"' " \
                   "group by product_id), " \
                   "final as( " \
                   "select p.id, finale.sfinale, finals.sfinals " \
