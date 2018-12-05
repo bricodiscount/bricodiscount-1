@@ -327,7 +327,7 @@ class ReportStocks(models.AbstractModel):
 
         #date_start = fields.Datetime.to_string(date_start)
         #date_stop = fields.Datetime.to_string(date_stop)
-        raise UserError(_(location.id))
+        #raise UserError(_(location.id))
         cr = self.env.cr
         #location = location[0]
         requete = "with sinite as " \
@@ -396,6 +396,7 @@ class ReportStocks(models.AbstractModel):
                   "on pr.categ_id = cat.id " \
                   "where cat.name in ('Carburant','Gaz') " \
                   "order by cat.name"
+        raise UserError(_(requete))
         cr.execute(requete)
         alines = cr.dictfetchall()
         return {
