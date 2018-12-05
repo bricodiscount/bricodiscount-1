@@ -427,7 +427,7 @@ class ReportVentes(models.AbstractModel):
         #raise UserError(_(location.id))
         cr = self.env.cr
         #location = location[0]
-        requete = "SELECT p.barcode, pr.name as produit, l.qty as quantite, p.standard_price as prixrevient, l.price_unit as prixvente, l.price_unit-p.standard_price as margeunit, (l.price_unit-p.standard_price)*l.qty as margetot, l.qty*l.price_unit as ventetot " \
+        requete = "SELECT p.barcode, pr.name as produit, l.qty as quantite, pr.standard_price as prixrevient, l.price_unit as prixvente, l.price_unit-pr.standard_price as margeunit, (l.price_unit-pr.standard_price)*l.qty as margetot, l.qty*l.price_unit as ventetot " \
                   "FROM product_product p, pos_order_line l, pos_order po, product_template pr " \
                   "WHERE l.product_id = p.id " \
                   "AND p.product_tmpl_id = pr.id " \
