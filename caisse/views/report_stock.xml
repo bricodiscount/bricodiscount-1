@@ -13,8 +13,8 @@
                         <tr class="text-center">
                             <th>Produit</th>
                             <th>Stock initial</th>
-                            <th>Quantité reçue</th>
-                            <th>Quantité livrée</th>
+                            <th>Quantité entrée</th>
+                            <th>Quantité sortie</th>
                             <th>Stock final</th>
                         </tr>
                     </thead>
