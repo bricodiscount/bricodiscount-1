@@ -325,8 +325,8 @@ class ReportStocks(models.AbstractModel):
     def get_stocks(self, date_start=False, date_stop=False, location=False):
 
 
-        date_start = fields.Datetime.to_string(date_start)
-        date_stop = fields.Datetime.to_string(date_stop)
+        #date_start = fields.Datetime.to_string(date_start)
+        #date_stop = fields.Datetime.to_string(date_stop)
 
         cr = self.env.cr
         #location = location[0]
