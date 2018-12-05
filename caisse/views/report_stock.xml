@@ -5,7 +5,7 @@
     <t t-call="web.html_container">
     <t t-call="web.internal_layout">
             <div class="page">
-                <div align="center"><strong><span t-esc="res_company.name"/>: Mouvements des stocks du <t t-esc="date_start" t-options="{'widget': 'datetime'}"/> au <t t-esc="date_stop" t-options="{'widget': 'datetime'}"/><strong></div><br/>
+                <div align="center"><strong><span t-esc="res_company.name"/>: Mouvements des stocks du <t t-esc="date_start" t-options="{'widget': 'datetime'}"/> au <t t-esc="date_stop" t-options="{'widget': 'datetime'}"/></strong></div><br/>
                 <t t-if="location">Emplacement: <span t-esc="nomlocation" /></t>
 
                 <table class="table table-condensed">
