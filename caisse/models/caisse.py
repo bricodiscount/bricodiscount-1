@@ -392,11 +392,8 @@ class ReportStocks(models.AbstractModel):
                   "on p.id = sortie.product_id " \
                   "left join final " \
                   "on p.id = final.id " \
-                  "left join product_category cat " \
-                  "on pr.categ_id = cat.id " \
-                  "where cat.name in ('Carburant','Gaz') " \
-                  "order by cat.name"
-        raise UserError(_(requete))
+                  "order by pr.name"
+        #raise UserError(_(requete))
         cr.execute(requete)
         alines = cr.dictfetchall()
         return {
