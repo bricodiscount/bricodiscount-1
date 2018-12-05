@@ -333,13 +333,13 @@ class ReportStocks(models.AbstractModel):
         requete = "with sinite as " \
                   "(SELECT product_id, sum(qty_done) as inite " \
                   "from stock_move_line " \
-                  "where location_dest_id = '"+str(location[0])+"' " \
+                  "where location_dest_id = '"+str(location.id)+"' " \
                   "and date < '"+date_start+"' " \
                   "group by product_id), " \
                   "sinits as " \
                   "(SELECT product_id, sum(qty_done) as inits " \
                   "from stock_move_line " \
-                  "where location_id = '"+str(location[0])+"' " \
+                  "where location_id = '"+str(location.id)+"' " \
                   "and date < '"+date_start+"' " \
                   "group by product_id), " \
                   "init as( " \
@@ -352,25 +352,25 @@ class ReportStocks(models.AbstractModel):
                   "entree as " \
                   "(select product_id, sum(qty_done) as qteent " \
                   "from stock_move_line " \
-                  "where location_dest_id = '"+str(location[0])+"' " \
+                  "where location_dest_id = '"+str(location.id)+"' " \
                   "and date between '"+date_start+"' AND '"+date_stop+"' " \
                   "group by product_id), " \
                   "sortie as " \
                   "(select product_id, sum(qty_done) as qtesort " \
                   "from stock_move_line " \
-                  "where location_id = '"+str(location[0])+"' " \
+                  "where location_id = '"+str(location.id)+"' " \
                   "and date between '"+date_start+"' AND '"+date_stop+"' " \
                   "group by product_id), " \
                   "finale as " \
                   "(SELECT product_id, sum(qty_done) as sfinale " \
                   "from stock_move_line " \
-                  "where location_dest_id = '"+str(location[0])+"' " \
+                  "where location_dest_id = '"+str(location.id)+"' " \
                   "and date <= '"+date_stop+"' " \
                   "group by product_id), " \
                   "finals as " \
                   "(SELECT product_id, sum(qty_done) as sfinals " \
                   "from stock_move_line " \
-                  "where location_id = '"+str(location[0])+"' " \
+                  "where location_id = '"+str(location.id)+"' " \
                   "and date <= '"+date_stop+"' " \
                   "group by product_id), " \
                   "final as( " \
