@@ -22,7 +22,8 @@
                     <tbody>
                         <t t-foreach="alines" t-as="aline">
                             <tr>
-                                <td><img t-if="aline['barcode']" t-att-src="'data:image/png;base64,%s' % aline['barcode']"/></td>
+                                <!--<td><img t-if="aline['barcode']" t-att-src="'data:image/png;base64,%s' % aline['barcode']"/></td>-->
+                                <td><span t-esc="aline['barcode']"/></td>
                                 <td><span t-esc="aline['produit']"/></td>
                                 <td align="right"><span t-esc="'{:,.0f}'.format(aline['stinit']).replace(',', ' ').replace('.', ',')"/></td>
                                 <td align="right"><span t-esc="'{:,.0f}'.format(aline['qteent']).replace(',', ' ').replace('.', ',')"/></td>
