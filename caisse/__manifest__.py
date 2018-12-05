@@ -15,6 +15,7 @@ Gestion de la paie
     'website': 'http://www.hsnconsult.com',
     'depends': ['point_of_sale'],
     'data': [
+        'security/caisse_security.xml',
         'wizard/etats_caisse.xml',
         'views/caisse_report.xml',
         'views/report_vendeursdet.xml',
