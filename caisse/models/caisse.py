@@ -322,12 +322,16 @@ class ReportStocks(models.AbstractModel):
 
 
     @api.model
-    def get_stocks(self, date_start=False, date_stop=False, location=False):
+    def get_stocks(self, date_start=False, date_stop=False, location=False, avecm=False):
 
 
         #date_start = fields.Datetime.to_string(date_start)
         #date_stop = fields.Datetime.to_string(date_stop)
         #raise UserError(_(location.id))
+        if avecm:
+           cond = " where entree.qteent+sortie.qtesort != 0 " 
+        else:
+           cond = " " 
         cr = self.env.cr
         #location = location[0]
         requete = "with sinite as " \
@@ -391,8 +395,7 @@ class ReportStocks(models.AbstractModel):
                   "left join sortie " \
                   "on p.id = sortie.product_id " \
                   "left join final " \
-                  "on p.id = final.id " \
-                  "where entree.qteent+sortie.qtesort != 0 " \
+                  "on p.id = final.id "+cond+" " \
                   "order by pr.name"
         #raise UserError(_(requete))
         cr.execute(requete)
@@ -406,6 +409,6 @@ class ReportStocks(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         data = dict(data or {})
         location = self.env['stock.location'].browse(data['location'])
-        data.update(self.get_stocks(data['date_start'], data['date_stop'] ,location[0]))
+        data.update(self.get_stocks(data['date_start'], data['date_stop'] ,location[0],avecm))
         #raise UserError(_(data))
         return data
