@@ -11,7 +11,6 @@
                     <thead>
                         <tr class="text-center">
                             <th>Code</th>
-                            <th>Client</th>
                             <th>Produit</th>
                             <th>Quantié vendue</th>
                             <th>Coût de revient</th>
@@ -34,7 +33,6 @@
                                 <img t-else="" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', aline['barcode'], 600, 150)" style="width:100%;height:20%;"/>
                                 <span t-esc="aline['barcode']"/></td>
                                 <td><span t-esc="aline['produit']"/></td>
-                                <td></td>
                                 <td align="right"><span t-esc="'{:,.0f}'.format(aline['quantite']).replace(',', ' ').replace('.', ',')"/></td>
                                 <td align="right"><span t-esc="'{:,.0f}'.format(aline['prixrevient']).replace(',', ' ').replace('.', ',')"/></td>
                                 <td align="right"><span t-esc="'{:,.0f}'.format(aline['prixvente']).replace(',', ' ').replace('.', ',')"/></td>
@@ -45,7 +43,7 @@
                             <t t-set="ventecash" t-value="ventecash+aline['totvente']"/>
                             <t t-set="margecash" t-value="margecash+aline['margetot']"/>
                         </t>
-                            <tr><td colspan="7" style="background-color:#ccc;font-weight:bold;fon-size:18px;">Sous Total POS-Cash</td>
+                            <tr><td colspan="6" style="background-color:#ccc;font-weight:bold;fon-size:18px;">Sous Total POS-Cash</td>
                                 <td style="background-color:#ccc;font-weight:bold;fon-size:18px;"><span t-esc="'{:,.0f}'.format(margecash).replace(',', ' ').replace('.', ',')"/></td>
                                 <td style="background-color:#ccc;font-weight:bold;fon-size:18px;"><span t-esc="'{:,.0f}'.format(ventecash).replace(',', ' ').replace('.', ',')"/></td>
                             </tr>
@@ -61,7 +59,6 @@
                                 <img t-else="" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', aline['barcode'], 600, 150)" style="width:100%;height:20%;"/>
                                 <span t-esc="aline['barcode']"/></td>
                                 <td><span t-esc="aline['produit']"/></td>
-                                <td><span t-esc="aline['client']"/></td>
                                 <td align="right"><span t-esc="'{:,.0f}'.format(aline['quantite']).replace(',', ' ').replace('.', ',')"/></td>
                                 <td align="right"><span t-esc="'{:,.0f}'.format(aline['prixrevient']).replace(',', ' ').replace('.', ',')"/></td>
                                 <td align="right"><span t-esc="'{:,.0f}'.format(aline['prixvente']).replace(',', ' ').replace('.', ',')"/></td>
@@ -72,11 +69,11 @@
                             <t t-set="ventecredit" t-value="ventecredit+aline['totvente']"/>
                             <t t-set="margecredit" t-value="margecredit+aline['margetot']"/>
                         </t>
-                            <tr><td colspan="7" style="background-color:#ccc;font-weight:bold;fon-size:18px;">Sous Total POS-Crédit</td>
+                            <tr><td colspan="6" style="background-color:#ccc;font-weight:bold;fon-size:18px;">Sous Total POS-Crédit</td>
                                 <td style="background-color:#ccc;font-weight:bold;fon-size:18px;"><span t-esc="'{:,.0f}'.format(margecredit).replace(',', ' ').replace('.', ',')"/></td>
                                 <td style="background-color:#ccc;font-weight:bold;fon-size:18px;"><span t-esc="'{:,.0f}'.format(ventecredit).replace(',', ' ').replace('.', ',')"/></td>
                             </tr>
-                             <tr><td colspan="7" style="background-color:#ccc;font-weight:bold;fon-size:18px;">Grand Total</td>
+                             <tr><td colspan="6" style="background-color:#ccc;font-weight:bold;fon-size:18px;">Grand Total</td>
                                 <td style="background-color:#ccc;font-weight:bold;fon-size:18px;"><span t-esc="'{:,.0f}'.format(margecash+margecredit).replace(',', ' ').replace('.', ',')"/></td>
                                 <td style="background-color:#ccc;font-weight:bold;fon-size:18px;"><span t-esc="'{:,.0f}'.format(ventecash+ventecredit).replace(',', ' ').replace('.', ',')"/></td>
                             </tr>
