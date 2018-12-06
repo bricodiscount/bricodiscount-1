@@ -53,8 +53,8 @@
                     <thead>
                         <tr class="text-center">
                             <th>Code</th>
-                            <th>Client</th>
                             <th>Produit</th>
+                            <th>Client</th>
                             <th>Quantié vendue</th>
                             <th>Coût de revient</th>
                             <th>Pu Vente Net</th>
