@@ -87,7 +87,7 @@
                             <t t-set="ventecredit" t-value="ventecredit+aline['totvente']"/>
                             <t t-set="margecredit" t-value="margecredit+aline['margetot']"/>
                         </t>
-                            <tr><td colspan="6" style="background-color:#ccc;font-weight:bold;fon-size:18px;">Sous Total POS-Crédit</td>
+                            <tr><td colspan="7" style="background-color:#ccc;font-weight:bold;fon-size:18px;">Sous Total POS-Crédit</td>
                                 <td style="background-color:#ccc;font-weight:bold;fon-size:18px;"><span t-esc="'{:,.0f}'.format(margecredit).replace(',', ' ').replace('.', ',')"/></td>
                                 <td style="background-color:#ccc;font-weight:bold;fon-size:18px;"><span t-esc="'{:,.0f}'.format(ventecredit).replace(',', ' ').replace('.', ',')"/></td>
                             </tr>
