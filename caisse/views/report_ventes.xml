@@ -47,23 +47,6 @@
                                 <td style="background-color:#ccc;font-weight:bold;fon-size:18px;"><span t-esc="'{:,.0f}'.format(margecash).replace(',', ' ').replace('.', ',')"/></td>
                                 <td style="background-color:#ccc;font-weight:bold;fon-size:18px;"><span t-esc="'{:,.0f}'.format(ventecash).replace(',', ' ').replace('.', ',')"/></td>
                             </tr>
-                    </tbody>
-                    </table>
-                    <table class="table table-condensed">
-                    <thead>
-                        <tr class="text-center">
-                            <th>Code</th>
-                            <th>Client</th>
-                            <th>Produit</th>
-                            <th>Quantié vendue</th>
-                            <th>Coût de revient</th>
-                            <th>Pu Vente Net</th>
-                            <th>Marge unitaire</th>
-                            <th>Marge totale</th>
-                            <th>Total vendu</th>
-                        </tr>
-                    </thead>
-                    <tbody>
                         <t t-set="margecredit" t-value="0"/>
                         <t t-set="ventecredit" t-value="0"/>    
                         <t t-foreach="clines" t-as="aline">
