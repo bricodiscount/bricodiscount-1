@@ -67,7 +67,7 @@
                  <div style="width:50%;float:left; padding-left:25px">
                    <div style="width:100%;font-size:20px; line-height:30px;" >
                         <table style="width:80%" class="table">
-                           <tr><td><strong>Solde comptable</strong></td><td><strong><span t-esc="'{:,.0f}'.format(o.cash_register_balance_end).replace(',', ' ').replace('.', ',')"/></strong></td></tr>
+                           <tr><td><strong>Solde comptable</strong></td><td align="right"><strong><span t-esc="'{:,.0f}'.format(o.cash_register_balance_end).replace(',', ' ').replace('.', ',')"/></strong></td></tr>
                         </table>
                     </div>
                   </div>
