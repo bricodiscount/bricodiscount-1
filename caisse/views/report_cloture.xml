@@ -81,7 +81,7 @@
                         <t t-foreach="o.statement_ids" t-as="st">
                          <t t-if="st.journal_id.type=='bank'">
                            <t t-foreach="st.line_ids" t-as="stline">
-                                 <t t-set="ventechq" t-value="ventechq+stline.amount"/>
+                                 <t t-set="ventecheq" t-value="ventecheq+stline.amount"/>
                             </t>
                            </t>
                           </t>
