@@ -23,6 +23,7 @@ Gestion de la paie
         'views/report_rayonsdet.xml',
         'views/report_stock.xml',
         'views/report_ventes.xml',
+        'views/report_cloture.xml',
         ],
     'installable': True,
     'application': True,
