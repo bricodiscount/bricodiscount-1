@@ -35,7 +35,7 @@
                         <t t-foreach="o.statement_ids" t-as="st">
                          <t t-if="st.journal_id.type=='cash'">
                            <t t-foreach="st.line_ids" t-as="stline">
-                              <t t-if="'comptage' in stline.name">
+                              <t t-if="('comptage' in stline.name) or ('counting' in stline.name)">
                                  <t t-set="ecart" t-value="ecart+stline.amount"/>
                               </t>
                               <t t-if="'Shop' in stline.name">
