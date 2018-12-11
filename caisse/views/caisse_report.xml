@@ -36,4 +36,12 @@
     <record id="sale_ventes_report" model="ir.actions.report">
             <field name="paperformat_id" ref="hr_holidays.paperformat_hrsummary"/>
     </record>
+        <report 
+            id="report_cloture"
+            model="pos.session"
+            string="Etat de clôture"
+            report_type="qweb-pdf"
+            name="caisse.report_rapcloture"
+            file="caisse.report_rapcloture"
+            />
 </odoo>
