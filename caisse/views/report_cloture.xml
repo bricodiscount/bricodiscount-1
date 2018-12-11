@@ -91,7 +91,7 @@
                            <t t-if="st.journal_id.type=='bank'">
                            <t t-foreach="st.line_ids" t-as="stline">
                            <tr><td><strong>Client</strong></td><td><strong>Montant</strong></td></tr>
-                            <tr><td align="right"><span t-esc="'{:,.0f}'.format(stline.partner_id.name).replace(',', ' ').replace('.', ',')"/></td>
+                            <tr><td align="right"><span t-esc="stline.partner_id.name"/></td>
                                  <td align="right"><span t-esc="'{:,.0f}'.format(stline.amount).replace(',', ' ').replace('.', ',')"/></td></tr>
                            <tr><td><strong>Total</strong></td><td><strong><span t-esc="'{:,.0f}'.format(ventechq).replace(',', ' ').replace('.', ',')"/></strong></td></tr>
                             </t>
