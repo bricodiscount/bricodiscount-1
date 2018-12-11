@@ -59,7 +59,7 @@
                 <div style="width:100%; float:left;">
                  <div style="width:50%;float:left; padding-left:5px">
                    <div style="width:100%;font-size:20px; line-height:30px;" >
-                        <table style="width:80%" class="table">
+                        <table style="width:85%" class="table">
                            <tr><td colspan="2"><strong>Total</strong></td><td align="right"><strong><span t-esc="'{:,.0f}'.format(o.cash_register_balance_end_real).replace(',', ' ').replace('.', ',')"/></strong></td></tr>
                         </table>
                     </div>
