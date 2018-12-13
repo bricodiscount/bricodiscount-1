@@ -24,6 +24,7 @@ Gestion de la paie
         'views/report_stock.xml',
         'views/report_ventes.xml',
         'views/report_cloture.xml',
+        'views/report_etiquette.xml',
         ],
     'installable': True,
     'application': True,
