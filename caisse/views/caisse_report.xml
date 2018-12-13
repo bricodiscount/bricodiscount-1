@@ -46,7 +46,7 @@
             />
             <report 
             id="report_etiquette"
-            model="product_template"
+            model="product.template"
             string="Etiquette Brico"
             report_type="qweb-pdf"
             name="caisse.report_bricoetiquette"
