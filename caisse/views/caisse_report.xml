@@ -44,4 +44,12 @@
             name="caisse.report_rapcloture"
             file="caisse.report_rapcloture"
             />
+            <report 
+            id="report_etiquette"
+            model="product_product"
+            string="Etiquette Brico"
+            report_type="qweb-pdf"
+            name="caisse.report_bricoetiquette"
+            file="caisse.report_bricoetiquette"
+            />
 </odoo>
