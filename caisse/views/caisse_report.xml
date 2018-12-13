@@ -52,4 +52,7 @@
             name="caisse.report_bricoetiquette"
             file="caisse.report_bricoetiquette"
             />
+        <record id="report_etiquette" model="ir.actions.report">
+            <field name="paperformat_id" ref="hr_holidays.paperformat_hrsummary"/>
+    </record>
 </odoo>
