@@ -11,12 +11,6 @@ from odoo.tools import float_is_zero
 from odoo.exceptions import UserError
 from odoo.http import request
 from odoo.addons import decimal_precision as dp
-
-_logger = logging.getLogger(__name__)
-
-class PosOrder(models.Model):
-    _name = "pos.order"
-    _inherit = "pos.order"
     
 class ReportVendeursDet(models.AbstractModel):
 
