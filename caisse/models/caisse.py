@@ -12,63 +12,6 @@ from odoo.exceptions import UserError
 from odoo.http import request
 from odoo.addons import decimal_precision as dp
 
-_logger = logging.getLogger(__name__)
-
-class PosOrder(models.Model):
-    _name = "pos.order"
-    _inherit = "pos.order"
-    
-    @api.model
-    def _process_order(self, pos_order):
-        prec_acc = self.env['decimal.precision'].precision_get('Account')
-        pos_session = self.env['pos.session'].browse(pos_order['pos_session_id'])
-        if pos_session.state == 'closing_control' or pos_session.state == 'closed':
-            pos_order['pos_session_id'] = self._get_valid_session(pos_order).id
-        order = self.create(self._order_fields(pos_order))
-        journal_ids = set()
-        for payments in pos_order['statement_ids']:
-            if not float_is_zero(payments[2]['amount'], precision_digits=prec_acc):
-            #    order.add_payment(self._payment_fields(payments[2]))
-            #journal_ids.add(payments[2]['journal_id'])
-                order.add_payment({
-                    'amount': payments[2]['amount']-pos_order['amount_return'],
-                    'payment_date': fields.Datetime.now(),
-                    'payment_name': payments[2]['name'],
-                    'journal': payments[2]['journal_id'],
-                })
-            #raise UserError(_(payments[2]))
-        if pos_session.sequence_number <= pos_order['sequence_number']:
-            pos_session.write({'sequence_number': pos_order['sequence_number'] + 1})
-            pos_session.refresh()
-
-        #if not float_is_zero(pos_order['amount_return'], prec_acc):
-        #    cash_journal_id = pos_session.cash_journal_id.id
-        #    if not cash_journal_id:
-        #        # Select for change one of the cash journals used in this
-        #        # payment
-        #        cash_journal = self.env['account.journal'].search([
-        #            ('type', '=', 'cash'),
-        #            ('id', 'in', list(journal_ids)),
-        #        ], limit=1)
-        #        if not cash_journal:
-        #            # If none, select for change one of the cash journals of the POS
-        #            # This is used for example when a customer pays by credit card
-        #            # an amount higher than total amount of the order and gets cash back
-        #           cash_journal = [statement.journal_id for statement in pos_session.statement_ids if statement.journal_id.type == 'cash']
-        #            if not cash_journal:
-        #                raise UserError(_("No cash statement found for this session. Unable to record returned cash."))
-        #        cash_journal_id = cash_journal[0].id
-        #    order.add_payment({
-        #        'amount': -pos_order['amount_return'],
-        #        'payment_date': fields.Datetime.now(),
-        #        'payment_name': _('return'),
-        #        'journal': cash_journal_id,
-        #    })
-        return order
-
-
-
-
 class ReportVendeursDet(models.AbstractModel):
 
     _name = 'report.caisse.report_vendeursdet'
