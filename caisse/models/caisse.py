@@ -12,7 +12,6 @@ from odoo.exceptions import UserError
 from odoo.http import request
 from odoo.addons import decimal_precision as dp
 
-_logger = logging.getLogger(__name__)
 
 class ReportVendeursDet(models.AbstractModel):
 
