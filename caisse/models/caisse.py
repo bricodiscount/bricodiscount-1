@@ -13,6 +13,62 @@ from odoo.http import request
 from odoo.addons import decimal_precision as dp
 
 
+class PosSession(models.Model):
+    _name = 'pos.session'
+    _inherit = 'pos.session'
+    _description = 'Point of Sale Session'
+
+    compta = fields.Boolean("Remis en banque", default = False)
+    def transferer(self):
+        am = self.env['account.move']
+        aml = []
+        company = self.env.user.company_id
+        vals1 = {
+                'account_id':company.caisse.id,
+                'name' : 'Transfert banque',
+                'debit': 0,
+                'credit': self.cash_register_total_encoding,
+                }
+        aml.append((0, False, vals1))
+        vals2 = {
+                'account_id':company.transfer.id,
+                'name' : 'Transfert banque',
+                'debit': self.cash_register_total_encoding,
+                'credit': 0,
+                }
+        aml.append((0, False, vals2))
+
+        amc = am.create({'journal_id':company.journalcaisse.id,'date':self.stop_at,'ref':self.name})
+        for record in amc:
+            record.write({'line_ids':aml})
+            record.post()
+
+        aml = []
+        company = self.env.user.company_id
+        vals1 = {
+                'account_id':company.transfert.id,
+                'name' : 'Transfert banque',
+                'debit': 0,
+                'credit': self.cash_register_total_encoding,
+                }
+        aml.append((0, False, vals1))
+        vals2 = {
+                'account_id':company.banque.id,
+                'name' : 'Transfert banque',
+                'debit': self.cash_register_total_encoding,
+                'credit': 0,
+                }
+        aml.append((0, False, vals2))
+
+        amc = am.create({'journal_id':company.journalbanque.id,'date':self.stop_at,'ref':self.name})
+        for record in amc:
+            record.write({'line_ids':aml})
+            record.post()
+        self.write({'compta':True})
+        #self.write({'move_id': amc.id})
+        return True
+
+
 class ReportVendeursDet(models.AbstractModel):
 
     _name = 'report.caisse.report_vendeursdet'
