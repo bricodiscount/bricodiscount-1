@@ -31,7 +31,7 @@ class PosSession(models.Model):
                 }
         aml.append((0, False, vals1))
         vals2 = {
-                'account_id':company.transfer.id,
+                'account_id':company.transfert.id,
                 'name' : 'Transfert banque',
                 'debit': self.cash_register_total_entry_encoding,
                 'credit': 0,
