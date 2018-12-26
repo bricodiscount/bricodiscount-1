@@ -166,6 +166,11 @@
                          <field name="retc"/>
                          <field name="retachat"/>
                          <field name="avance"/>
+			 <field name="journalcaisse"/>
+			 <field name="journalbanque"/>
+			 <field name="caisse"/>
+			 <field name="banque"/>
+			 <field name="transfert"/>
 			           </group>   
                     </page>      
                 </xpath>
