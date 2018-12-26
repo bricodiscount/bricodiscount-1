@@ -17,6 +17,7 @@ Gestion de la paie
     'data': [
         'security/caisse_security.xml',
         'wizard/etats_caisse.xml',
+        'views/caisse_view.xml',
         'views/caisse_report.xml',
         'views/report_vendeursdet.xml',
         'views/report_vendeurs.xml',
