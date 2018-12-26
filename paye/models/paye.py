@@ -390,3 +390,10 @@ class Company(models.Model):
     retc = fields.Many2one('account.account',string='Retenue cimetière')
     retachat = fields.Many2one('account.account',string='Retenue achat')
     avance = fields.Many2one('account.account',string='Avances et acomptes')
+    
+    journalcaisse = fields.Many2one('account.journal',string='Journal caisse')
+    journalbanque = fields.Many2one('account.journal',string='Journal banque')
+    caisse = fields.Many2one('account.account',string='Compte de caisse')
+    banque = fields.Many2one('account.account',string='Compte de banque')
+    transfert = fields.Many2one('account.account',string='Compte de transfert')
+
