@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
             <field name="arch" type="xml">
                <xpath expr="//button[@name='action_pos_session_validate']" position="after">
-                <button name="transferer" type="object" string="Remise en banque" attrs="{'invisible' : ['|', ('compta', '=', True),('state', '!=', 'closes')]}" class="oe_highlight" groups="account.group_account_manager"/>
+                <button name="transferer" type="object" string="Remise en banque" attrs="{'invisible' : ['|', ('compta', '=', True),('state', '!=', 'closed')]}" class="oe_highlight" groups="account.group_account_manager"/>
                 </xpath>
                <xpath expr="//field[@name='name']" position="replace">
                                 <field name="compta"/>
