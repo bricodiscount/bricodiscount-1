@@ -27,13 +27,13 @@ class PosSession(models.Model):
                 'account_id':company.caisse.id,
                 'name' : 'Transfert banque',
                 'debit': 0,
-                'credit': self.cash_register_total_encoding,
+                'credit': self.cash_register_total_entry_encoding,
                 }
         aml.append((0, False, vals1))
         vals2 = {
                 'account_id':company.transfer.id,
                 'name' : 'Transfert banque',
-                'debit': self.cash_register_total_encoding,
+                'debit': self.cash_register_total_entry_encoding,
                 'credit': 0,
                 }
         aml.append((0, False, vals2))
@@ -49,13 +49,13 @@ class PosSession(models.Model):
                 'account_id':company.transfert.id,
                 'name' : 'Transfert banque',
                 'debit': 0,
-                'credit': self.cash_register_total_encoding,
+                'credit': self.cash_register_total_entry_encoding,
                 }
         aml.append((0, False, vals1))
         vals2 = {
                 'account_id':company.banque.id,
                 'name' : 'Transfert banque',
-                'debit': self.cash_register_total_encoding,
+                'debit': self.cash_register_total_entry_encoding,
                 'credit': 0,
                 }
         aml.append((0, False, vals2))
