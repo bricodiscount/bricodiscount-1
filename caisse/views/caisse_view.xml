@@ -9,7 +9,7 @@
                <xpath expr="//button[@name='action_pos_session_validate']" position="after">
                 <button name="transferer" type="object" string="Remise en banque" attrs="{'invisible' : ['|', ('compta', '=', True),('state', '!=', 'closed')]}" class="oe_highlight" groups="account.group_account_manager"/>
                 </xpath>
-               <xpath expr="//field[@name='name']" position="replace">
+               <xpath expr="//field[@name='name']" position="after">
                                 <field name="compta"/>
                 </xpath>
             </field>
