@@ -12,6 +12,7 @@
                 </xpath>
                <xpath expr="//field[@name='name']" position="after">
                                 <field name="compta"/>
+		                <field name="remis"/>
                 </xpath>
             </field>
         </record>
