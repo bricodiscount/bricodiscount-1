@@ -38,10 +38,17 @@ class PosSession(models.Model):
                 }
         aml.append((0, False, vals2))
 
-        amc = am.create({'journal_id':company.journalcaisse.id,'date':self.stop_at,'ref':self.name})
+        amc = am.create({'journal_id':company.journalcaisse.id,'date':self.start_at + datetime.timedelta(days=1),'ref':self.name})
         for record in amc:
             record.write({'line_ids':aml})
             record.post()
+
+        self.write({'compta':True})
+        #self.write({'move_id': amc.id})
+        return True
+    
+    def transferer2(self):
+        am = self.env['account.move']
 
         aml = []
         company = self.env.user.company_id
@@ -60,14 +67,13 @@ class PosSession(models.Model):
                 }
         aml.append((0, False, vals2))
 
-        amc = am.create({'journal_id':company.journalbanque.id,'date':self.stop_at,'ref':self.name})
+        amc = am.create({'journal_id':company.journalbanque.id,'date':self.start_at + datetime.timedelta(days=1),'ref':self.name})
         for record in amc:
             record.write({'line_ids':aml})
             record.post()
-        self.write({'compta':True})
+        self.write({'remis':True})
         #self.write({'move_id': amc.id})
         return True
-
 
 class ReportVendeursDet(models.AbstractModel):
 
