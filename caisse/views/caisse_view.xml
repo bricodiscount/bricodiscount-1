@@ -11,7 +11,7 @@
 		<button name="transferer2" type="object" string="Remise en banque" attrs="{'invisible' : ['|', ('remis', '=', True),('compta', '=', False)]}" class="oe_highlight" groups="account.group_account_manager"/>       
                 </xpath>
                <xpath expr="//field[@name='name']" position="after">
-                                <field name="compta" readonly="1"/>
+                                <field name="compta"/>
 		                <field name="remis" readonly="1"/>
                 </xpath>
             </field>
