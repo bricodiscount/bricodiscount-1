@@ -18,7 +18,8 @@ class PosSession(models.Model):
     _inherit = 'pos.session'
     _description = 'Point of Sale Session'
 
-    compta = fields.Boolean("Remis en banque", default = False)
+    compta = fields.Boolean("Sortie de caisse", default = False)
+    remis = fields.Boolean("Remis en banque", default = False)
     def transferer(self):
         am = self.env['account.move']
         aml = []
