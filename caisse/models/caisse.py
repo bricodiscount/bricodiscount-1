@@ -526,23 +526,68 @@ class ReportVentes(models.AbstractModel):
         return data
 
     
-class AccountBankStatementLine(models.Model):
-    _name = "account.bank.statement.line"
-    _description = "Bank Statement Line"
-    _inherit = "account.bank.statement.line"
-    def _get_common_sql_query(self, overlook_partner = False, excluded_ids = None, split = False):
-        acc_type = "acc.reconcile = true"
-        select_clause = "SELECT aml.id "
-        from_clause = "FROM account_move_line aml JOIN account_account acc ON acc.id = aml.account_id "
-        account_clause = ''
-        if self.journal_id.default_credit_account_id and self.journal_id.default_debit_account_id:
-            account_clause = "(aml.statement_id IS NULL AND aml.account_id = self.journal_id.default_credit_account_id)"
-        where_clause = """WHERE aml.company_id = %(company_id)s
-                          AND (
-                                    """ + account_clause + """
-                          )"""
-        where_clause = where_clause + ' AND aml.partner_id = %(partner_id)s' if self.partner_id else where_clause
-        where_clause = where_clause + ' AND aml.id NOT IN %(excluded_ids)s' if excluded_ids else where_clause
-        if split:
-            return select_clause, from_clause, where_clause
-        return select_clause + from_clause + where_clause
+class AccountReconciliation(models.AbstractModel):
+    _name = 'account.reconciliation.widget'
+    _description = 'Account Reconciliation widget'
+    _inherit = 'account.reconciliation.widget'
+    @api.model
+    def _domain_move_lines_for_reconciliation(self, st_line, aml_accounts, partner_id, excluded_ids=None, search_str=False):
+        """ Return the domain for account.move.line records which can be used for bank statement reconciliation.
+
+            :param aml_accounts:
+            :param partner_id:
+            :param excluded_ids:
+            :param search_str:
+        """
+
+        domain_reconciliation = [
+            '&', '&',
+            ('statement_line_id', '=', False),
+            ('account_id', 'in', aml_accounts)
+        ]
+
+        # Black lines = unreconciled & (not linked to a payment or open balance created by statement
+        domain_matching = [('reconciled', '=', False)]
+        if partner_id:
+            domain_matching = expression.AND([
+                domain_matching,
+                [('account_id.internal_type', 'in', ['payable', 'receivable'])]
+            ])
+        else:
+            # TODO : find out what use case this permits (match a check payment, registered on a journal whose account type is other instead of liquidity)
+            domain_matching = expression.AND([
+                domain_matching,
+                [('account_id.reconcile', '=', True)]
+            ])
+
+        # Let's add what applies to both
+        #domain = expression.OR([domain_reconciliation, domain_matching])
+        domain = domain_reconciliation
+        if partner_id:
+            domain = expression.AND([domain, [('partner_id', '=', partner_id)]])
+
+        # Domain factorized for all reconciliation use cases
+        if search_str:
+            str_domain = self._domain_move_lines(search_str=search_str)
+            if not partner_id:
+                str_domain = expression.OR([
+                    str_domain,
+                    [('partner_id.name', 'ilike', search_str)]
+                ])
+            domain = expression.AND([
+                domain,
+                str_domain
+            ])
+
+        if excluded_ids:
+            domain = expression.AND([
+                [('id', 'not in', excluded_ids)],
+                domain
+            ])
+        # filter on account.move.line having the same company as the statement line
+        domain = expression.AND([domain, [('company_id', '=', st_line.company_id.id)]])
+
+        if st_line.company_id.account_bank_reconciliation_start:
+            domain = expression.AND([domain, [('date', '>=', st_line.company_id.account_bank_reconciliation_start)]])
+
+        return domain
