@@ -2,6 +2,7 @@
 import logging
 from datetime import timedelta
 from functools import partial
+from odoo.osv import expression
 
 import psycopg2
 import pytz
