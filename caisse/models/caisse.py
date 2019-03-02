@@ -563,8 +563,8 @@ class AccountReconciliation(models.AbstractModel):
         # Let's add what applies to both
         #domain = expression.OR([domain_reconciliation, domain_matching])
         domain = domain_reconciliation
-        #if partner_id:
-        #    domain = expression.AND([domain, [('partner_id', '=', partner_id)]])
+        if partner_id:
+            domain = expression.AND([domain, [('partner_id', '=', partner_id)]])
 
         # Domain factorized for all reconciliation use cases
         if search_str:
@@ -591,26 +591,3 @@ class AccountReconciliation(models.AbstractModel):
             domain = expression.AND([domain, [('date', '>=', st_line.company_id.account_bank_reconciliation_start)]])
 
         return domain
-    
-    class AccountBankStatementLine(models.Model):
-         _name = "account.bank.statement.line"
-         _description = "Bank Statement Line"
-         _inherit = "account.bank.statement.line"
-    
-         def _get_common_sql_query(self, overlook_partner = False, excluded_ids = None, split = False):
-            acc_type = "acc.reconcile = true"
-            select_clause = "SELECT aml.id "
-            from_clause = "FROM account_move_line aml JOIN account_account acc ON acc.id = aml.account_id "
-            account_clause = ''
-            if self.journal_id.default_credit_account_id and self.journal_id.default_debit_account_id:
-                account_clause = "(aml.statement_id IS NULL AND aml.account_id IN %(account_payable_receivable)s) OR"
-            where_clause = """WHERE aml.company_id = %(company_id)s
-                          AND (
-                                    """ + account_clause + """
-                                    ("""+acc_type+""" AND aml.reconciled = false)
-                          )"""
-            where_clause = where_clause + ' AND aml.partner_id = %(partner_id)s' if self.partner_id else where_clause
-            where_clause = where_clause + ' AND aml.id NOT IN %(excluded_ids)s' if excluded_ids else where_clause
-            if split:
-                return select_clause, from_clause, where_clause
-            return select_clause + from_clause + where_clause
