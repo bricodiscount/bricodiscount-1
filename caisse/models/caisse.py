@@ -589,6 +589,6 @@ class AccountReconciliation(models.AbstractModel):
         domain = expression.AND([domain, [('company_id', '=', st_line.company_id.id)]])
 
         if st_line.company_id.account_bank_reconciliation_start:
-            domain = expression.AND([domain, [('date', '>=', st_line.company_id.account_bank_reconciliation_start)]])
+            domain = expression.AND([domain, [('date', '>=', st_line.company_id.account_bank_reconciliation_start AND aml.payment_id IS NOT NULL)]])
 
         return domain
