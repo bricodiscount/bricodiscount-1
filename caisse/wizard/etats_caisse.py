@@ -173,6 +173,7 @@ class PosStocks(models.TransientModel):
     start_date = fields.Datetime('Date début', required=True, default=fields.Datetime.now)
     end_date = fields.Datetime('Date fin', required=True, default=fields.Datetime.now)
     location = fields.Many2one('stock.location', 'Emplacement')
+    categorie = fields.Many2one('product.category', 'Catégorie')
     avecm = fields.Boolean('Mouvementé', default=False)
 
     @api.onchange('start_date')
@@ -191,5 +192,5 @@ class PosStocks(models.TransientModel):
             raise UserError(_("You have to set a logo or a layout for your company."))
         elif (not self.env.user.company_id.external_report_layout_id):
             raise UserError(_("You have to set your reports's header and footer layout."))
-        data = {'date_start': self.start_date, 'date_stop': self.end_date, 'location': self.location.id, 'nomlocation':self.location.display_name, 'avecm': self.avecm}
+        data = {'date_start': self.start_date, 'date_stop': self.end_date, 'location': self.location.id, 'nomlocation':self.location.display_name, 'categorie':self.categorie.id, 'avecm': self.avecm}
         return self.env.ref('caisse.sale_stocks_report').report_action([], data=data)
