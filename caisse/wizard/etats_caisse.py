@@ -173,7 +173,6 @@ class PosStocks(models.TransientModel):
     start_date = fields.Datetime('Date début', required=True, default=fields.Datetime.now)
     end_date = fields.Datetime('Date fin', required=True, default=fields.Datetime.now)
     location = fields.Many2one('stock.location', 'Emplacement')
-    #categorie = fields.Many2one('product.category', 'Catégorie')
     avecm = fields.Boolean('Mouvementé', default=False)
 
     @api.onchange('start_date')
