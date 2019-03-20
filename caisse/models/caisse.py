@@ -385,7 +385,7 @@ class ReportStocks(models.AbstractModel):
 
 
     @api.model
-    def get_stocks(self, date_start=False, date_stop=False, location=False, avecm=False):
+    def get_stocks(self, date_start=False, date_stop=False, location=False, avecm=False, categorie=False):
 
 
         #date_start = fields.Datetime.to_string(date_start)
@@ -472,7 +472,7 @@ class ReportStocks(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         data = dict(data or {})
         location = self.env['stock.location'].browse(data['location'])
-        data.update(self.get_stocks(data['date_start'], data['date_stop'] ,location[0],data['avecm']))
+        data.update(self.get_stocks(data['date_start'], data['date_stop'] ,location[0],data['avecm'],data['categorie']))
         #raise UserError(_(data))
         return data
 
